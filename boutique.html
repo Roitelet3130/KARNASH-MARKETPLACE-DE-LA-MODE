@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Espace Vendeur | Vogue</title>
+    <title>Espace Vendeur | KARNASH MARKETPLACE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,200 +12,235 @@
             --accent-purple: #6c5ce7;
             --text-color: #2d3436;
             --border-color: #dfe6e9;
+            --success-color: #2ecc71;
         }
-        <div class="sidebar">
-    <a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a>
-    <a href="produits.html"><i class="fa-solid fa-box"></i> Mes Articles</a>
-    <a href="parametres.html"><i class="fa-solid fa-gear"></i> Paramètres</a>
-    
-    <a href="connexion.html" onclick="localStorage.clear();" style="color: red; text-decoration: none; margin-top: 30px; display: block;">
-        <i class="fa-solid fa-sign-out-alt"></i> Se déconnecter
-    </a>
-</div>
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--primary-bg);
-            margin: 0;
-            padding: 20px;
             color: var(--text-color);
+            margin: 0;
+            padding: 0;
         }
-        .vendeur-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .header-box {
+        header {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 30px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            margin-bottom: 25px;
+            align-items: center;
         }
-        .shop-info { display: flex; align-items: center; gap: 15px; }
-        .shop-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #eee; }
-        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        @media(max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } }
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-purple);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .logout-btn {
+            color: #ff4757;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media(min-width: 768px) {
+            .container { grid-template-columns: 400px 1fr; }
+        }
         .card {
             background: var(--card-bg);
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            box-sizing: border-box;
         }
+        .card h2 { margin-top: 0; font-size: 20px; color: var(--accent-purple); border-bottom: 2px solid #f4f5f7; padding-bottom: 10px; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
         .form-control {
             width: 100%; padding: 10px; border: 1px solid var(--border-color);
-            border-radius: 6px; box-sizing: border-box; font-size: 14px; outline: none;
+            border-radius: 6px; font-size: 14px; box-sizing: border-box; outline: none;
         }
         .form-control:focus { border-color: var(--accent-purple); }
-        .btn-publier {
-            width: 100%; padding: 12px; background: var(--accent-purple);
-            color: white; border: none; border-radius: 6px; font-size: 15px;
-            font-weight: bold; cursor: pointer; transition: 0.3s;
+        .btn-submit {
+            width: 100%; padding: 12px; background: var(--accent-purple); color: white;
+            border: none; border-radius: 6px; font-size: 15px; font-weight: bold;
+            cursor: pointer; transition: background 0.2s; margin-top: 10px;
         }
-        .btn-publier:hover { background: #5b4cc4; }
-        .product-item {
-            display: flex; align-items: center; gap: 15px;
-            padding: 10px; border-bottom: 1px solid var(--border-color);
+        .btn-submit:hover { background: #5b4cc4; }
+        
+        /* Tableau des articles publiés */
+        .table-wrapper { overflow-x: auto; }
+        table {
+            width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;
         }
-        .product-item img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; }
-        .logout-btn { color: #e74c3c; text-decoration: none; font-weight: 600; }
+        th, td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+        th { background: #f8f9fa; font-weight: 600; }
+        .product-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; }
+        .btn-delete {
+            background: none; border: none; color: #ff4757; cursor: pointer; font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
-<div class="vendeur-container">
-    <div class="header-box">
-        <div class="shop-info">
-            <img id="displayLogo" class="shop-logo" src="https://via.placeholder.com/60" alt="Logo">
-            <div>
-                <h2 id="displayShopName" style="margin:0;">Ma Boutique</h2>
-                <p id="displayVendorName" style="margin:5px 0 0 0; color:#7f8c8d; font-size:14px;">Vendeur Vogue</p>
-            </div>
+    <header>
+        <a href="#" class="logo"><i class="fa-solid fa-store"></i> Espace Vendeur</a>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span id="shopTitle" style="font-weight: bold; color: #7f8c8d;">Ma Boutique</span>
+            <a href="connexion.html" onclick="localStorage.clear();" class="logout-btn" title="Déconnexion"><i class="fa-solid fa-sign-out-alt"></i></a>
         </div>
-        <a href="connexion.html" class="logout-btn"><i class="fa-solid fa-sign-out-alt"></i> Déconnexion</a>
-    </div>
+    </header>
 
-    <div class="grid-layout">
+    <div class="container">
         <div class="card">
-            <h3 style="margin-top:0; color: var(--accent-purple);"><i class="fa-solid fa-plus-circle"></i> Publier un nouvel article</h3>
-            <form id="addProductForm">
+            <h2>Publier un article</h2>
+            <form id="publishForm">
                 <div class="form-group">
                     <label>Nom de l'article</label>
-                    <input type="text" id="pName" class="form-control" placeholder="Ex: Chemise Oversize en Lin" required>
+                    <input type="text" id="prodName" class="form-control" placeholder="Ex: Robe Pagne, Sneakers..." required>
                 </div>
                 <div class="form-group">
-                    <label>Prix (en $ USD)</label>
-                    <input type="number" id="pPrice" class="form-control" placeholder="Ex: 45" required>
+                    <label>Prix (en $)</label>
+                    <input type="number" id="prodPrice" class="form-control" placeholder="Ex: 25" required>
                 </div>
                 <div class="form-group">
-                    <label>Catégorie</label>
-                    <select id="pCategory" class="form-control">
-                        <option value="Vêtements">Vêtements</option>
-                        <option value="Chaussures">Chaussures</option>
-                        <option value="Accessoires">Accessoires / Bijoux</option>
-                    </select>
+                    <label>Description (Optionnelle)</label>
+                    <textarea id="prodDesc" class="form-control" rows="3" placeholder="Taille, couleur, matière..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="pDesc" class="form-control" rows="3" placeholder="Détails de l'article, tailles disponibles..."></textarea>
+                    <label>Photo de l'article</label>
+                    <input type="file" id="prodImage" class="form-control" accept="image/*" required>
                 </div>
-                <div class="form-group">
-                    <label>Image de l'article</label>
-                    <input type="file" id="pImage" accept="image/*" required>
-                </div>
-                <button type="submit" class="btn-publier">Mettre en vente immédiatement</button>
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-cloud-arrow-up"></i> Mettre en vente</button>
             </form>
         </div>
 
         <div class="card">
-            <h3 style="margin-top:0;"><i class="fa-solid fa-boxes-stacked"></i> Mes articles en ligne</h3>
-            <div id="myProductsList">
-                </div>
+            <h2>Mes articles en vente actuelle</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myProductsTable">
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Récupérer les données de la boutique inscrite
-    const registeredUser = JSON.parse(localStorage.getItem('registeredUser')) || {
-        fullName: "Roitelet N'zau",
-        shopName: "Karnash Marketplace",
-        shopLogo: ""
-    };
+    <script>
+        // Récupération du nom de la boutique du vendeur connecté
+        const compteUtilisateur = JSON.parse(localStorage.getItem('compte_utilisateur')) || {};
+        const currentShopName = compteUtilisateur.shopName || "Boutique Vogue";
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('shopTitle').innerText = "🏪 " + currentShopName;
+            afficherMesArticles();
+        });
 
-    document.getElementById('displayShopName').innerText = registeredUser.shopName;
-    document.getElementById('displayVendorName').innerText = "Gérant : " + registeredUser.fullName;
-    if(registeredUser.shopLogo) {
-        document.getElementById('displayLogo').src = registeredUser.shopLogo;
-    }
+        // Événement lors de la soumission du formulaire
+        document.getElementById('publishForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-    // 2. Charger les produits existants
-    displayMyProducts();
+            const name = document.getElementById('prodName').value.trim();
+            const price = document.getElementById('prodPrice').value.trim();
+            const description = document.getElementById('prodDesc').value.trim();
+            const imageFile = document.getElementById('prodImage').files[0];
 
-    // 3. Soumission du formulaire d'ajout
-    document.getElementById('addProductForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+            if (!imageFile) return;
 
-        const name = document.getElementById('pName').value.trim();
-        const price = document.getElementById('pPrice').value;
-        const category = document.getElementById('pCategory').value;
-        const desc = document.getElementById('pDesc').value.trim();
-        const imageInput = document.getElementById('pImage').files[0];
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                // Création de l'objet produit complet
+                const newProduct = {
+                    id: Date.now(), // ID unique pour pouvoir le supprimer facilement
+                    name: name,
+                    price: price,
+                    description: description,
+                    image: reader.result, // Image convertie en texte Base64
+                    shopName: currentShopName // Lié à la boutique actuelle
+                };
 
-        const reader = new FileReader();
-        reader.onloadend = function() {
-            const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-            
-            const newProduct = {
-                id: Date.now(),
-                shopName: registeredUser.shopName,
-                name: name,
-                price: price,
-                category: category,
-                desc: desc,
-                image: reader.result
+                // --- LOGIQUE DE STOCKAGE ACCUMULATIVE ---
+                // On récupère les produits déjà existants sur la marketplace sans les effacer
+                let globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+                
+                // On AJOUTE le nouveau produit à la suite des autres (.push)
+                globalProducts.push(newProduct);
+                
+                // On réenregistre la liste augmentée
+                localStorage.setItem('globalProducts', JSON.stringify(globalProducts));
+
+                // Réinitialisation du formulaire pour le prochain article
+                document.getElementById('publishForm').reset();
+                alert(`✨ Succès ! L'article "${name}" a été ajouté au catalogue général.`);
+                
+                // Rafraîchir le tableau d'affichage
+                afficherMesArticles();
             };
 
-            allProducts.push(newProduct);
-            localStorage.setItem('globalProducts', JSON.stringify(allProducts));
+            reader.readAsDataURL(imageFile);
+        });
 
-            document.getElementById('addProductForm').reset();
-            displayMyProducts();
-        };
-        reader.readAsDataURL(imageInput);
-    });
+        // Fonction pour afficher uniquement les articles publiés par ce vendeur spécifique
+        function afficherMesArticles() {
+            const tbody = document.getElementById('myProductsTable');
+            if (!tbody) return;
 
-    function displayMyProducts() {
-        const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-        const container = document.getElementById('myProductsList');
-        container.innerHTML = '';
+            const globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+            
+            // On filtre pour ne garder que les articles de la boutique en cours
+            const myProducts = globalProducts.filter(p => p.shopName === currentShopName);
 
-        // Filtrer pour ne voir que les produits de cette boutique précise
-        const myProducts = allProducts.filter(p => p.shopName === registeredUser.shopName);
+            if (myProducts.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#7f8c8d;">Vous n'avez publié aucun article pour le moment.</td></tr>`;
+                return;
+            }
 
-        if(myProducts.length === 0) {
-            container.innerHTML = '<p style="color:#7f8c8d; font-style:italic;">Aucun article publié pour le moment.</p>';
-            return;
+            tbody.innerHTML = "";
+            myProducts.forEach(product => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><img src="${product.image}" class="product-thumb"></td>
+                        <td style="font-weight:600;">${product.name}</td>
+                        <td style="color:var(--accent-purple); font-weight:bold;">${product.price} $</td>
+                        <td style="color:#7f8c8d; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${product.description || '-'}</td>
+                        <td>
+                            <button class="btn-delete" onclick="supprimerArticle(${product.id})" title="Retirer de la vente">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
         }
 
-        myProducts.forEach(p => {
-            container.innerHTML += `
-                <div class="product-item">
-                    <img src="${p.image}" alt="">
-                    <div style="flex:1;">
-                        <strong style="display:block;">${p.name}</strong>
-                        <span style="font-size:12px; color:#7f8c8d;">Catégorie: ${p.category}</span>
-                    </div>
-                    <span style="font-weight:bold; color:var(--accent-purple);">${p.price} $</span>
-                </div>
-            `;
-        });
-    }
-});
-</script>
+        // Fonction pour retirer un article du marché global
+        window.supprimerArticle = function(productId) {
+            if (confirm("Voulez-vous vraiment retirer cet article de la vente ?")) {
+                let globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+                
+                // On filtre pour enlever uniquement l'article qui possède cet ID unique
+                globalProducts = globalProducts.filter(p => p.id !== productId);
+                
+                localStorage.setItem('globalProducts', JSON.stringify(globalProducts));
+                afficherMesArticles();
+            }
+        };
+    </script>
 </body>
 </html>
