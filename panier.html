@@ -3,334 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karnash Marketplace de la mode | Mon Panier</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Paiement Sécurisé | Vogue</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --primary-color: #1a0933;   
-            --accent-purple: #6a2b83;  
-            --accent-gold: #cca43b;    
-            --bg-light: #f9f8fa;       
-            --text-dark: #2d2438;      
-            --text-muted: #796e85;     
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
-            --transition: all 0.3s ease;
+            --primary-bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --accent-purple: #6c5ce7;
+            --text-color: #2d3436;
+            --success-color: #2ecc71;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        a { text-decoration: none; color: inherit; }
-
-        /* --- NAVBAR --- */
-        .navbar {
-            background-color: var(--white);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 8%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-img {
-            height: 32px; 
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--primary-color);
-            text-transform: uppercase;
-        }
-
-        .logo-text span {
-            color: var(--accent-gold);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-purple);
-        }
-
-        .nav-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 20px;
-            align-items: center;
-        }
-
-        .badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background-color: var(--accent-purple);
-            color: var(--white);
-            font-size: 11px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
-
-        /* --- CONTENU PANIER --- */
-        .cart-container {
-            padding: 40px 8%;
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .cart-main {
-            flex: 2;
-            min-width: 350px;
-        }
-
-        .cart-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            background-color: var(--white);
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
             padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: var(--shadow);
-            gap: 20px;
-            border: 1px solid rgba(106, 43, 131, 0.03);
-        }
-
-        .item-img {
-            width: 90px;
-            height: 110px;
-            background-color: #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            object-fit: cover;
-        }
-
-        .item-details {
-            flex: 1;
-        }
-
-        .item-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .item-store {
-            font-size: 12px;
-            color: var(--accent-gold);
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .item-qty {
-            margin-top: 10px;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            min-height: 90vh;
         }
-
-        .qty-btn {
-            background-color: #faf9fc;
-            border: 1px solid #e2daf0;
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .item-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent-purple);
-            text-align: right;
-        }
-
-        .delete-btn {
-            color: #ff4757;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            margin-left: 10px;
-            transition: var(--transition);
-        }
-
-        .delete-btn:hover { transform: scale(1.1); }
-
-        /* --- SIDEBAR RÉCAPITULATIF --- */
-        .cart-sidebar {
-            flex: 1;
-            min-width: 300px;
-            background-color: var(--white);
+        .pay-card {
+            background: var(--card-bg);
+            max-width: 450px;
+            width: 100%;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            height: fit-content;
-            border: 1px solid rgba(106, 43, 131, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            box-sizing: border-box;
         }
-
-        .summary-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary-color);
+        .price-tag {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-purple);
+            margin: 15px 0;
+        }
+        .method-icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+            color: #f1c40f;
+        }
+        .form-group {
+            text-align: left;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 10px;
         }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .summary-total {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary-color);
-            border-top: 2px solid var(--bg-light);
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-
-        .btn-checkout {
+        .form-group label {
             display: block;
-            text-align: center;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            padding: 14px;
-            border-radius: 50px;
+            margin-bottom: 6px;
             font-weight: 600;
-            margin-top: 25px;
-            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.3);
-            transition: var(--transition);
-        }
-
-        .btn-checkout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(106, 43, 131, 0.5);
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 30px 8%;
-            text-align: center;
             font-size: 14px;
-            margin-top: 60px;
-            border-top: 3px solid var(--accent-gold);
+        }
+        .form-control {
+            width: 100%; padding: 12px; border: 1px solid #dfe6e9;
+            border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none;
+        }
+        .btn-pay {
+            width: 100%; padding: 14px; background: var(--success-color); color: white;
+            border: none; border-radius: 8px; font-size: 16px; font-weight: bold;
+            cursor: pointer; transition: 0.2s;
+        }
+        .btn-pay:hover { background: #27ae60; }
+        .cancel-link {
+            display: inline-block; margin-top: 15px; color: #7f8c8d; text-decoration: none; font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
-            <a href="index.html" class="logo-text">KARNASH<span>.Marketplace de la mode</span></a>
+    <div class="pay-card">
+        <div id="methodLogo" class="method-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <h2 style="margin: 5px 0;">Finaliser le Paiement</h2>
+        <p style="color: #7f8c8d; margin: 5px 0 15px 0;" id="clientGreeting">Cher client, merci pour votre confiance.</p>
+        
+        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+            <span style="font-size: 13px; color: #7f8c8d; display: block;">Montant Total à Payer :</span>
+            <div class="price-tag" id="amountToPay">0 $</div>
         </div>
-        <nav class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="catalogue.html">Catalogue</a>
-            <a href="boutiques.html">Boutiques</a>
-        </nav>
-        <div class="nav-icons">
-            <a href="connexion.html"><i class="fa-regular fa-user"></i></a>
-            <a href="client/favoris.html"><i class="fa-regular fa-heart"></i></a>
-            <a href="panier.html" class="active">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="badge">1</span>
-            </a>
-        </div>
-    </header>
 
-    <main class="cart-container">
-        <div class="cart-main">
-            <h1 class="cart-title">Votre Panier</h1>
+        <form id="paymentExecutionForm">
+            <div class="form-group" id="phoneFieldGroup">
+                <label id="phoneLabel">Numéro de compte Mobile Money</label>
+                <input type="tel" id="payPhoneNumber" class="form-control" placeholder="Ex: 082XXXXXXX">
+                <small style="color: #95a5a6; margin-top: 5px; display: block;">Un message de validation (PIN) sera envoyé sur ce téléphone.</small>
+            </div>
+
+            <div class="form-group" id="cashFieldGroup" style="display: none; text-align: center; color: #7f8c8d;">
+                <p><i class="fa-solid fa-hand-holding-dollar" style="font-size: 30px; color: #2ecc71;"></i></p>
+                <p>Vous paierez la somme exacte en mains propres lors de la réception de vos articles à votre adresse.</p>
+            </div>
+
+            <button type="submit" class="btn-pay" id="submitPayBtn">Confirmer et Payer</button>
+        </form>
+
+        <a href="commande.html" class="cancel-link"><i class="fa-solid fa-chevron-left"></i> Modifier mes infos</a>
+    </div>
+
+    <script>
+        const infoAchat = JSON.parse(localStorage.getItem('dernier_achat')) || { total: 0, methode: 'Cash', client: 'Acheteur' };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('amountToPay').innerText = infoAchat.total + " $";
+            document.getElementById('clientGreeting').innerText = `Merci pour votre commande, ${infoAchat.client}.`;
             
-            <div class="cart-item">
-                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=300" alt="Mocassins" class="item-img">
-                <div class="item-details">
-                    <div class="item-store">Karnash Fashion</div>
-                    <h3 class="item-title">Mocassins en Cuir Artisanal</h3>
-                    <p style="font-size: 13px; color: var(--text-muted);">Taille: 42</p>
-                    <div class="item-qty">
-                        <button class="qty-btn">-</button>
-                        <span>1</span>
-                        <button class="qty-btn">+</button>
-                    </div>
-                </div>
-                <div>
-                    <div class="item-price">120 $</div>
-                    <button class="delete-btn" title="Supprimer"><i class="fa-regular fa-trash-can"></i></button>
-                </div>
-            </div>
-        </div>
+            const logoContainer = document.getElementById('methodLogo');
+            const phoneGroup = document.getElementById('phoneFieldGroup');
+            const cashGroup = document.getElementById('cashFieldGroup');
+            const phoneInput = document.getElementById('payPhoneNumber');
+            const btn = document.getElementById('submitPayBtn');
 
-        <div class="cart-sidebar">
-            <h2 class="summary-title">Récapitulatif</h2>
-            <div class="summary-row">
-                <span>Sous-total</span>
-                <strong>120 $</strong>
-            </div>
-            <div class="summary-row">
-                <span>Livraison</span>
-                <span style="color: #2ed573; font-weight: 600;">Gratuite</span>
-            </div>
-            <div class="summary-row summary-total">
-                <span>Total</span>
-                <span style="color: var(--accent-purple);">120 $</span>
-            </div>
+            // Personnalisation visuelle selon l'opérateur choisi à Kinshasa
+            if (infoAchat.methode === 'Mpesa') {
+                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #e74c3c;"></i> <span style="font-size:16px; font-weight:bold; color:#e74c3c; display:block;">M-PESA VODACOM</span>`;
+                phoneInput.required = true;
+            } else if (infoAchat.methode === 'AirtelMoney') {
+                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #ff4757;"></i> <span style="font-size:16px; font-weight:bold; color:#ff4757; display:block;">AIRTEL MONEY</span>`;
+                phoneInput.required = true;
+            } else if (infoAchat.methode === 'OrangeMoney') {
+                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #ffa500;"></i> <span style="font-size:16px; font-weight:bold; color:#ffa500; display:block;">ORANGE MONEY</span>`;
+                phoneInput.required = true;
+            } else {
+                // Si c'est en Cash
+                logoContainer.innerHTML = `<i class="fa-solid fa-money-bill-wave" style="color: #2ecc71;"></i> <span style="font-size:16px; font-weight:bold; color:#2ecc71; display:block;">Paiement Cash</span>`;
+                phoneGroup.style.display = 'none';
+                cashGroup.style.display = 'block';
+                btn.innerText = "Finaliser la commande";
+            }
+        });
 
-            <a href="commande.html" class="btn-checkout">Passer la commande</a>
-        </div>
-    </main>
+        document.getElementById('paymentExecutionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-    <footer>
-        <p>&copy; 2026 KARNASH MARKETPLACE DE LA MODE - Tous droits réservés.</p>
-    </footer>
+            if (infoAchat.methode === 'Cash') {
+                alert(`🛒 Commande Enregistrée !\n\nVotre commande de ${infoAchat.total} $ est validée. Préparez le montant en cash pour la livraison à : ${infoAchat.adresse}.`);
+            } else {
+                const phone = document.getElementById('payPhoneNumber').value;
+                alert(`📱 Requête envoyée avec succès !\n\nUn message pop-up de validation a été envoyé au numéro ${phone}.\nEntrez votre code secret PIN pour confirmer le paiement de ${infoAchat.total} $.`);
+            }
 
+            // Nettoyage final du panier global après l'achat réussi
+            localStorage.removeItem('panier_vogue');
+            localStorage.removeItem('dernier_achat');
+            
+            // Retour triomphal sur la page d'accueil
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>
