@@ -202,6 +202,33 @@
             <p>Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a></p>
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.querySelector('form');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Empêche la page de se recharger
+                
+                // Récupère les éléments du formulaire (ajoute les bons ID ou classes si besoin)
+                const emailSaisi = document.querySelector('input[type="email"]').value;
+                const passwordSaisi = document.querySelector('input[type="password"]').value;
+                
+                // Récupère l'admin stocké en mémoire
+                const adminEmailStocke = localStorage.getItem('adminEmail') || "admin@karnash.com"; // Compte par défaut
+                const adminPasswordStocke = localStorage.getItem('adminPassword') || "1234"; // Mot de passe par défaut
+                
+                // Vérification des identifiants
+                if (emailSaisi === adminEmailStocke && passwordSaisi === adminPasswordStocke) {
+                    alert("Connexion réussie ! Bienvenue Admin.");
+                    window.location.href = 'dashboard.html'; // Redirection vers le tableau de bord
+                } else {
+                    alert("Identifiants incorrects. Veuillez réessayer.");
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
