@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Rigoureuse | Vogue</title>
+    <title>Inscription | Vogue</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,11 +12,11 @@
             --accent-purple: #6c5ce7;
             --text-color: #2d3436;
             --border-color: #dfe6e9;
+            --success-color: #2ecc71;
         }
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--primary-bg);
-            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,7 +63,7 @@
             width: 100%; padding: 12px 12px 12px 42px;
             border: 1px solid var(--border-color);
             border-radius: 8px; font-size: 14px; box-sizing: border-box;
-            outline: none; transition: border-color 0.3s;
+            outline: none;
         }
         .form-control:focus { border-color: var(--accent-purple); }
         
@@ -85,6 +85,34 @@
         .btn-auth:hover { background: #5b4cc4; }
         .auth-footer { text-align: center; margin-top: 20px; font-size: 14px; }
         .auth-footer a { color: var(--accent-purple); text-decoration: none; font-weight: bold; }
+
+        /* --- STYLES DE LA BOITE DE CONFIRMATION (MODAL SUCCÈS) --- */
+        .success-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); display: flex;
+            justify-content: center; align-items: center; z-index: 999;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .success-modal.active { opacity: 1; pointer-events: auto; }
+        .modal-box {
+            background: white; padding: 30px; border-radius: 16px;
+            text-align: center; max-width: 400px; width: 90%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: scale(0.7); transition: transform 0.3s ease;
+        }
+        .success-modal.active .modal-box { transform: scale(1); }
+        .modal-icon {
+            width: 70px; height: 70px; background: #e8f8f0; color: var(--success-color);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 32px; margin: 0 auto 20px auto;
+        }
+        .btn-modal {
+            background: var(--success-color); color: white; border: none;
+            padding: 12px 25px; border-radius: 8px; font-size: 15px;
+            font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-modal:hover { background: #27ae60; }
     </style>
 </head>
 <body>
@@ -92,7 +120,7 @@
 <div class="auth-container">
     <div class="auth-header">
         <h2>Créer un compte</h2>
-        <p>Formulaire d'inscription rigoureux Vogue</p>
+        <p>Rejoignez la plateforme Vogue</p>
     </div>
 
     <div class="role-selector">
@@ -111,7 +139,7 @@
             <label>Nom complet</label>
             <div class="input-wrap">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" id="fullName" class="form-control" placeholder="Ex: Roitelet N'zau" required>
+                <input type="text" id="fullName" class="form-control" placeholder="Votre nom" required>
             </div>
         </div>
 
@@ -119,7 +147,7 @@
             <label>Adresse Email</label>
             <div class="input-wrap">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="Ex: roiteletnzau611@gmail.com" required>
+                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
             </div>
         </div>
 
@@ -141,42 +169,48 @@
 
         <div id="vendeur-fields">
             <h4 style="margin: 0 0 10px 0; color: var(--accent-purple);">Informations sur la Boutique</h4>
-            
             <div class="form-group">
                 <label>Nom de la Boutique</label>
                 <div class="input-wrap">
                     <i class="fa-solid fa-shop"></i>
-                    <input type="text" id="shopName" class="form-control" placeholder="Ex: Karnash Mode">
+                    <input type="text" id="shopName" class="form-control" placeholder="Nom de votre marque">
                 </div>
             </div>
-
             <div class="form-group">
-                <label>Importer le Logo de la Boutique</label>
+                <label>Logo de la Boutique</label>
                 <input type="file" id="shopLogo" accept="image/*" style="font-size: 12px; margin-top: 5px;">
             </div>
         </div>
 
-        <button type="submit" class="btn-auth">Créer mon compte</button>
+        <button type="submit" class="btn-auth">S'inscrire</button>
     </form>
 
     <div class="auth-footer">
-        Déjà inscrit ? <a href="connexion.html">Connectez-vous ici</a>
+        Déjà inscrit ? <a href="connexion.html">Connectez-vous</a>
+    </div>
+</div>
+
+<div class="success-modal" id="successModal">
+    <div class="modal-box">
+        <div class="modal-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Inscription Réussie !</h3>
+        <p style="color: #7f8c8d; font-size: 14px; line-height: 1.5; margin: 0 0 15px 0;">
+            Bienvenue sur <br><strong style="color: var(--accent-purple);">KARNASH MARKETPLACE DE LA MODE</strong>.
+        </p>
+        <p style="color: #2d3436; font-size: 13px; margin: 0; font-weight: 600;">
+            Votre compte est désormais confirmé et actif.
+        </p>
+        <button class="btn-modal" onclick="redirigerVersConnexion()">Aller se connecter <i class="fa-solid fa-arrow-right"></i></button>
     </div>
 </div>
 
 <script>
 function toggleFields() {
     const isVendeur = document.getElementById('roleVendeur').checked;
-    const vendeurFields = document.getElementById('vendeur-fields');
-    const shopNameInput = document.getElementById('shopName');
-    
-    if (isVendeur) {
-        vendeurFields.style.display = 'block';
-        shopNameInput.required = true;
-    } else {
-        vendeurFields.style.display = 'none';
-        shopNameInput.required = false;
-    }
+    document.getElementById('vendeur-fields').style.display = isVendeur ? 'block' : 'none';
+    document.getElementById('shopName').required = isVendeur;
 }
 
 document.getElementById('rigorousRegisterForm').addEventListener('submit', function(e) {
@@ -186,7 +220,8 @@ document.getElementById('rigorousRegisterForm').addEventListener('submit', funct
     const fullName = document.getElementById('fullName').value.trim();
     const email = document.getElementById('email').value.trim().toLowerCase();
     const phone = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value;
+    const password = document.getElementById('password').value.trim(); 
+    const shopName = role === 'vendeur' ? document.getElementById('shopName').value.trim() : '';
 
     const userData = {
         role: role,
@@ -194,7 +229,7 @@ document.getElementById('rigorousRegisterForm').addEventListener('submit', funct
         email: email,
         phone: phone,
         password: password,
-        shopName: role === 'vendeur' ? document.getElementById('shopName').value.trim() : '',
+        shopName: shopName,
         shopLogo: ''
     };
 
@@ -203,30 +238,27 @@ document.getElementById('rigorousRegisterForm').addEventListener('submit', funct
     if (logoFile && role === 'vendeur') {
         const reader = new FileReader();
         reader.onloadend = function() {
-            userData.shopLogo = reader.result; // Sauvegarde l'image sous forme de texte converti
-            saveAndRedirect(userData);
+            userData.shopLogo = reader.result;
+            saveAndShowSuccess(userData);
         }
         reader.readAsDataURL(logoFile);
     } else {
-        saveAndRedirect(userData);
+        saveAndShowSuccess(userData);
     }
 });
 
-function saveAndRedirect(data) {
-    // Enregistrement de sécurité dans le stockage local
-    localStorage.setItem('registeredUser', JSON.stringify(data));
+function saveAndShowSuccess(data) {
+    // 1. Sauvegarde dans le localStorage
+    localStorage.setItem('compte_utilisateur', JSON.stringify(data));
     
-    // Pour assurer une compatibilité complète avec la page de connexion
-    localStorage.setItem('userEmail', data.email);
-    localStorage.setItem('userPassword', data.password);
-    localStorage.setItem('userRole', data.role);
-    
-    // Le vendeur sera redirigé vers sa propre page générique appelée 'boutique.html'
-    localStorage.setItem('userBoutique', 'boutique.html');
+    // 2. Affichage immédiat du message de confirmation (Modal)
+    document.getElementById('successModal').classList.add('active');
+}
 
-    window.location.href = 'connexion.html?success=true';
+function redirigerVersConnexion() {
+    // 3. Redirection contrôlée vers la page de connexion
+    window.location.href = 'connexion.html';
 }
 </script>
-
 </body>
 </html>
