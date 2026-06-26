@@ -210,10 +210,31 @@
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault(); // Empêche la page de se recharger
                 
-                // Récupère les éléments du formulaire (ajoute les bons ID ou classes si besoin)
-                const emailSaisi = document.querySelector('input[type="email"]').value;
-                const passwordSaisi = document.querySelector('input[type="password"]').value;
-                
+                // Récupère les éléments tapés dans le formulaire
+        const emailSaisi = document.querySelector('input[type="email"]').value;
+        const passwordSaisi = document.querySelector('input[type="password"]').value;
+        
+        // --- COMPTE VENDEUR PAR DÉFAUT ---
+        const vendeurEmail = "roiteletnzau611@gmail.com";
+        const vendeurPassword = "1234"; // Change par ton vrai mot de passe vendeur
+        
+        // --- COMPTE CLIENT PAR DÉFAUT ---
+        const clientEmail = "client@vogue.com"; // Exemple de compte client
+        const clientPassword = "1234"; // Change par ton vrai mot de passe client
+
+        // Vérification instantanée (sans alert)
+        if (emailSaisi === vendeurEmail && passwordSaisi === vendeurPassword) {
+            // Connexion directe du Vendeur vers le tableau de bord
+            window.location.href = 'dashboard.html'; 
+        } 
+        else if (emailSaisi === clientEmail && passwordSaisi === clientPassword) {
+            // Connexion directe du Client vers la page d'accueil ou catalogue
+            window.location.href = 'index.html'; 
+        } 
+        else {
+            // On garde une alerte uniquement si les identifiants sont faux
+            alert("Mot de passe ou email incorrect.");
+        }
                 // Récupère l'admin stocké en mémoire
                 const adminEmailStocke = localStorage.getItem('adminEmail') || "admin@karnash.com"; // Compte par défaut
                 const adminPasswordStocke = localStorage.getItem('adminPassword') || "1234"; // Mot de passe par défaut
