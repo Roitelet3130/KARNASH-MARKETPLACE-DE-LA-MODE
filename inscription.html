@@ -3,246 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vogue Marketplace | Inscription</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Inscription | Vogue Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --primary-color: #1a0933;   
-            --accent-purple: #6a2b83;  
-            --accent-gold: #cca43b;    
-            --bg-light: #f9f8fa;       
-            --text-dark: #2d2438;      
-            --text-muted: #796e85;     
-            --white: #ffffff;
-            --shadow: 0 10px 25px rgba(26, 9, 51, 0.1);
-            --transition: all 0.3s ease;
+            --primary-bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --accent-purple: #6c5ce7;
+            --text-color: #2d3436;
+            --input-border: #dfe6e9;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            margin: 0;
         }
-
         .auth-container {
-            background-color: var(--white);
-            width: 100%;
-            max-width: 500px;
+            background-color: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(106, 43, 131, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
         }
-
         .auth-header {
             text-align: center;
             margin-bottom: 30px;
         }
-
-        .auth-header img {
-            height: 50px;
-            margin-bottom: 15px;
-        }
-
         .auth-header h2 {
+            margin: 0 0 10px 0;
             font-size: 26px;
-            font-weight: 700;
-            color: var(--primary-color);
         }
-
         .auth-header p {
-            color: var(--text-muted);
+            color: #7f8c8d;
+            margin: 0;
             font-size: 14px;
         }
-
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 8px;
+            font-weight: 600;
             font-size: 14px;
-            font-weight: 500;
-            color: var(--primary-color);
         }
-
         .input-icon-wrap {
             position: relative;
         }
-
         .input-icon-wrap i {
             position: absolute;
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 16px;
+            color: #b2bec3;
         }
-
         .form-control {
             width: 100%;
-            padding: 12px 15px 12px 45px;
-            border: 1px solid #e2daf0;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid var(--input-border);
             border-radius: 8px;
             font-size: 14px;
-            background-color: #faf9fc;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
+            box-sizing: border-box;
             outline: none;
-            border-color: var(--accent-purple);
-            background-color: var(--white);
-            box-shadow: 0 0 0 3px rgba(106, 43, 131, 0.1);
+            transition: border-color 0.3s;
         }
-
-        /* Style spécifique pour le choix du rôle */
-        .role-selection {
+        .form-control:focus {
+            border-color: var(--accent-purple);
+        }
+        .role-group {
             display: flex;
             gap: 15px;
-            margin-top: 5px;
+            margin-bottom: 20px;
         }
-
         .role-option {
             flex: 1;
-            position: relative;
+            text-align: center;
         }
-
-        .role-option input[type="radio"] {
+        .role-option input {
             display: none;
         }
-
-        .role-label {
+        .role-option label {
             display: block;
-            text-align: center;
-            padding: 12px;
-            border: 1px solid #e2daf0;
+            padding: 10px;
+            border: 1px solid var(--input-border);
             border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
-            font-size: 14px;
-            background-color: #faf9fc;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
-
-        .role-option input[type="radio"]:checked + .role-label {
+        .role-option input:checked + label {
+            background-color: var(--accent-purple);
+            color: white;
             border-color: var(--accent-purple);
-            background-color: rgba(106, 43, 131, 0.05);
-            color: var(--accent-purple);
         }
-
         .btn-auth {
             width: 100%;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            padding: 14px;
+            padding: 12px;
+            background-color: var(--accent-purple);
+            color: white;
             border: none;
             border-radius: 8px;
-            font-weight: 600;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.2);
+            transition: background-color 0.3s;
         }
-
         .btn-auth:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(106, 43, 131, 0.3);
+            background-color: #5b4cc4;
         }
-
         .auth-footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 14px;
-            color: var(--text-muted);
         }
-
         .auth-footer a {
             color: var(--accent-purple);
-            font-weight: 600;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-container">
-        <div class="auth-header">
-            <img src="logo.png" alt="Vogue Logo" onerror="this.style.display='none';">
-            <h2>Créer un compte</h2>
-            <p>Rejoignez Vogue Marketplace dès aujourd'hui</p>
-        </div>
-
-        <form action="connexion.html">
-            <div class="form-group">
-                <label for="fullname">Nom complet</label>
-                <div class="input-icon-wrap">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" id="fullname" class="form-control" placeholder="Ex: Jean Mukendi" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Adresse Email</label>
-                <div class="input-icon-wrap">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Je souhaite m'inscrire en tant que :</label>
-                <div class="role-selection">
-                    <div class="role-option">
-                        <input type="radio" id="role-client" name="user-role" value="client" checked>
-                        <label for="role-client" class="role-label">
-                            <i class="fa-solid fa-bag-shopping"></i> Client
-                        </label>
-                    </div>
-                    <div class="role-option">
-                        <input type="radio" id="role-vendeur" name="user-role" value="vendeur">
-                        <label for="role-vendeur" class="role-label">
-                            <i class="fa-solid fa-store"></i> Vendeur
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <div class="input-icon-wrap">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-auth">S'inscrire</button>
-        </form>
-
-        <div class="auth-footer">
-            <p>Vous avez déjà un compte ? <a href="connexion.html">Connectez-vous</a></p>
-        </div>
+<div class="auth-container">
+    <div class="auth-header">
+        <h2>Créer un compte</h2>
+        <p>Rejoignez la communauté Vogue Marketplace</p>
     </div>
+
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <div class="input-icon-wrap">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" class="form-control" placeholder="Votre pseudo" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Adresse Email</label>
+            <div class="input-icon-wrap">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-icon-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+        </div>
+
+        <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px;">Je souhaite être :</label>
+        <div class="role-group">
+            <div class="role-option">
+                <input type="radio" name="role" id="roleClient" value="client" checked>
+                <label for="roleClient">Client</label>
+            </div>
+            <div class="role-option">
+                <input type="radio" name="role" id="roleVendeur" value="vendeur">
+                <label for="roleVendeur">Vendeur</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-auth">S'inscrire</button>
+    </form>
+
+    <div class="auth-footer">
+        Déjà un compte ? <a href="connexion.html">Connectez-vous</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('registerForm');
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+
+            // Sauvegarde des données dans le localStorage (Simule une base de données)
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+            localStorage.setItem('userRole', role);
+            localStorage.setItem('userName', username);
+
+            // Redirection immédiate vers la page de connexion
+            window.location.href = 'connexion.html?registered=true';
+        });
+    }
+});
+</script>
 
 </body>
 </html>
