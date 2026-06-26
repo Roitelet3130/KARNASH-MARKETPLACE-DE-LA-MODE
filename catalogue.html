@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vogue Marketplace | Catalogue</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Même structure de style avec logo réduit à 32px */
+        :root {
+            --primary-color: #1a0933;   
+            --accent-purple: #6a2b83;  
+            --accent-gold: #cca43b;    
+            --bg-light: #f9f8fa;       
+            --text-dark: #2d2438;      
+            --text-muted: #796e85;     
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .navbar {
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 8px; }
+        .logo-img { height: 32px; object-fit: contain; } /* Petit logo uniforme */
+        .logo-text { font-size: 18px; font-weight: 800; color: var(--primary-color); }
+        .logo-text span { color: var(--accent-gold); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-purple); }
+
+        .nav-icons { display: flex; gap: 20px; font-size: 20px; align-items: center; }
+        .nav-icons a:hover { color: var(--accent-purple); }
+        .badge { position: absolute; top: -8px; right: -10px; background-color: var(--accent-purple); color: var(--white); font-size: 11px; padding: 2px 6px; border-radius: 50%; }
+
+        .page-header { background: linear-gradient(rgba(26, 9, 51, 0.8), rgba(26, 9, 51, 0.95)); color: var(--white); text-align: center; padding: 40px 20px; margin-bottom: 40px; }
+        .page-header h1 { font-size: 32px; margin-bottom: 10px; }
+
+        /* --- FILTRES & GRID --- */
+        .catalog-container { display: flex; padding: 0 8% 60px; gap: 30px; }
+        
+        .filters-sidebar { width: 250px; background-color: var(--white); padding: 25px; border-radius: 12px; box-shadow: var(--shadow); height: fit-content; }
+        .filter-title { font-size: 16px; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; text-transform: uppercase; border-bottom: 2px solid var(--bg-light); padding-bottom: 5px; }
+        .filter-group { margin-bottom: 25px; }
+        .filter-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
+
+        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
+        
+        .product-card { background-color: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid rgba(106, 43, 131, 0.05); transition: var(--transition); position: relative; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+        
+        .product-img { height: 260px; background-color: #eee; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .wishlist-btn { position: absolute; top: 15px; right: 15px; background: var(--white); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); cursor: pointer; box-shadow: var(--shadow); transition: var(--transition); }
+        .wishlist-btn:hover { color: #ff4757; transform: scale(1.1); }
+
+        .product-body { padding: 20px; }
+        .product-store { font-size: 12px; font-weight: 600; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 5px; }
+        .product-title { font-size: 16px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; }
+        .product-price { font-size: 18px; font-weight: 700; color: var(--accent-purple); }
+        
+        .add-to-cart { background: var(--primary-color); color: var(--white); border: none; width: 35px; height: 35px; border-radius: 8px; cursor: pointer; transition: var(--transition); }
+        .add-to-cart:hover { background: var(--accent-purple); }
+
+        footer { background-color: var(--primary-color); color: var(--white); padding: 30px 8%; text-align: center; font-size: 14px; border-top: 3px solid var(--accent-gold); }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
+            <a href="index.html" class="logo-text">VOGUE<span>.MARKETPLACE</span></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="catalogue.html" class="active">Catalogue</a>
+            <a href="boutiques.html">Boutiques</a>
+        </nav>
+        <div class="nav-icons">
+            <a href="connexion.html"><i class="fa-regular fa-user"></i></a>
+            <a href="client/favoris.html"><i class="fa-regular fa-heart"></i></a>
+            <a href="panier.html">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="badge">0</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>Le Catalogue Mode</h1>
+        <p>Explorez les dernières collections et pièces uniques du moment.</p>
+    </div>
+
+    <div class="catalog-container">
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <h4 class="filter-title">Catégories</h4>
+                <label><input type="checkbox"> Robes</label>
+                <label><input type="checkbox"> Chaussures</label>
+                <label><input type="checkbox"> Sacs</label>
+                <label><input type="checkbox"> Accessoires</label>
+            </div>
+        </aside>
+
+        <main class="products-grid">
+            <div class="product-card">
+                <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=500" alt="Robe">
+                </div>
+                <div class="product-body">
+                    <div class="product-store">Fashion Kin</div>
+                    <h3 class="product-title">Robe de Soirée Urban Style</h3>
+                    <div class="product-footer">
+                        <span class="product-price">85 $</span>
+                        <a href="produits.html" style="font-size: 12px; color: var(--accent-purple); font-weight: 600;">Voir produit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500" alt="Chaussures">
+                </div>
+                <div class="product-body">
+                    <div class="product-store">Karnash Fashion</div>
+                    <h3 class="product-title">Chaussures en cuir Premium</h3>
+                    <div class="product-footer">
+                        <span class="product-price">120 $</span>
+                        <a href="produits.html" style="font-size: 12px; color: var(--accent-purple); font-weight: 600;">Voir produit</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 VOGUE MARKETPLACE - Tous droits réservés.</p>
+    </footer>
+</footer>
+
+<script>
+    function rafraichirCompteurPanier() {
+        let nbArticles = localStorage.getItem('compteurPanier') || 0;
+        const badge = document.getElementById('cart-count') || document.querySelector('.badge');
+        if (badge) {
+            badge.innerText = nbArticles;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', rafraichirCompteurPanier);
+</script>
+
+
+</body>
+</html>

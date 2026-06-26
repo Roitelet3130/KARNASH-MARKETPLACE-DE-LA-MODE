@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnash Marketplace de la mode | Mon Panier</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #1a0933;   
+            --accent-purple: #6a2b83;  
+            --accent-gold: #cca43b;    
+            --bg-light: #f9f8fa;       
+            --text-dark: #2d2438;      
+            --text-muted: #796e85;     
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-img {
+            height: 32px; 
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-purple);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 20px;
+            align-items: center;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent-purple);
+            color: var(--white);
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* --- CONTENU PANIER --- */
+        .cart-container {
+            padding: 40px 8%;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cart-main {
+            flex: 2;
+            min-width: 350px;
+        }
+
+        .cart-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            gap: 20px;
+            border: 1px solid rgba(106, 43, 131, 0.03);
+        }
+
+        .item-img {
+            width: 90px;
+            height: 110px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .item-store {
+            font-size: 12px;
+            color: var(--accent-gold);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .item-qty {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background-color: #faf9fc;
+            border: 1px solid #e2daf0;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-purple);
+            text-align: right;
+        }
+
+        .delete-btn {
+            color: #ff4757;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+
+        .delete-btn:hover { transform: scale(1.1); }
+
+        /* --- SIDEBAR RÉCAPITULATIF --- */
+        .cart-sidebar {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            border: 1px solid rgba(106, 43, 131, 0.05);
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .summary-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-top: 2px solid var(--bg-light);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-checkout {
+            display: block;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
+            color: var(--white);
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 43, 131, 0.5);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 30px 8%;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 60px;
+            border-top: 3px solid var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
+            <a href="index.html" class="logo-text">KARNASH<span>.Marketplace de la mode</span></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="catalogue.html">Catalogue</a>
+            <a href="boutiques.html">Boutiques</a>
+        </nav>
+        <div class="nav-icons">
+            <a href="connexion.html"><i class="fa-regular fa-user"></i></a>
+            <a href="client/favoris.html"><i class="fa-regular fa-heart"></i></a>
+            <a href="panier.html" class="active">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="badge">1</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="cart-container">
+        <div class="cart-main">
+            <h1 class="cart-title">Votre Panier</h1>
+            
+            <div class="cart-item">
+                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=300" alt="Mocassins" class="item-img">
+                <div class="item-details">
+                    <div class="item-store">Karnash Fashion</div>
+                    <h3 class="item-title">Mocassins en Cuir Artisanal</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);">Taille: 42</p>
+                    <div class="item-qty">
+                        <button class="qty-btn">-</button>
+                        <span>1</span>
+                        <button class="qty-btn">+</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="item-price">120 $</div>
+                    <button class="delete-btn" title="Supprimer"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-sidebar">
+            <h2 class="summary-title">Récapitulatif</h2>
+            <div class="summary-row">
+                <span>Sous-total</span>
+                <strong>120 $</strong>
+            </div>
+            <div class="summary-row">
+                <span>Livraison</span>
+                <span style="color: #2ed573; font-weight: 600;">Gratuite</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span style="color: var(--accent-purple);">120 $</span>
+            </div>
+
+            <a href="commande.html" class="btn-checkout">Passer la commande</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KARNASH MARKETPLACE DE LA MODE - Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>

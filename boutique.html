@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnash Marketplace de la mode | Toutes les Boutiques</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #1a0933;   
+            --accent-purple: #6a2b83;  
+            --accent-gold: #cca43b;    
+            --bg-light: #f9f8fa;       
+            --text-dark: #2d2438;      
+            --text-muted: #796e85;     
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- NAVBAR WITH SMALL LOGO --- */
+        .navbar {
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-img {
+            height: 32px; 
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-purple);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 20px;
+            align-items: center;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-purple);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent-purple);
+            color: var(--white);
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            background: linear-gradient(rgba(26, 9, 51, 0.8), rgba(26, 9, 51, 0.95));
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #e2daf0;
+            font-size: 16px;
+        }
+
+        /* --- GRID & CARDS --- */
+        .section {
+            padding: 0 8% 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .store-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(106, 43, 131, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .store-banner {
+            height: 140px;
+            position: relative;
+            background-color: var(--primary-color);
+        }
+
+        .store-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .store-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 3px solid var(--accent-gold);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .store-body {
+            padding: 55px 20px 25px;
+        }
+
+        .store-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .store-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+            height: 42px;
+            overflow: hidden;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn:hover {
+            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.4);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 30px 8%;
+            text-align: center;
+            font-size: 14px;
+            border-top: 3px solid var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+           <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
+            <a href="index.html" class="logo-text">KARNASH<span>.Marketplace de la mode</span></a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="catalogue.html">Catalogue</a>
+            <a href="boutiques.html" class="active">Boutiques</a>
+        </nav>
+        <div class="nav-icons">
+            <a href="connexion.html"><i class="fa-regular fa-user"></i></a>
+            <a href="client/favoris.html"><i class="fa-regular fa-heart"></i></a>
+            <a href="panier.html">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="badge">0</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>Nos Boutiques Partenaires</h1>
+        <p>Achetez directement auprès des meilleurs créateurs de tendances.</p>
+    </div>
+
+    <section class="section">
+        <div class="grid">
+            
+            <div class="store-card">
+                <div class="store-banner">
+                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600" alt="Bannière Fashion Kin">
+                    <div class="store-avatar">FK</div>
+                </div>
+                <div class="store-body">
+                    <h3 class="store-name">Fashion Kin</h3>
+                    <p class="store-desc">Le meilleur du streetwear et de la mode urbaine branchée à Kinshasa.</p>
+                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="store-banner">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600" alt="Bannière Style Africa">
+                    <div class="store-avatar">SA</div>
+                </div>
+                <div class="store-body">
+                    <h3 class="store-name">Style Africa</h3>
+                    <p class="store-desc">Mélange moderne et élégant de tissus africains et coupes occidentales.</p>
+                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="store-banner">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=600" alt="Bannière Congo Chic">
+                    <div class="store-avatar">CC</div>
+                </div>
+                <div class="store-body">
+                    <h3 class="store-name">Congo Chic</h3>
+                    <p class="store-desc">Haute couture et designs uniques haut de gamme en Wax de qualité.</p>
+                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                </div>
+            </div>
+
+            <div class="store-card">
+                <div class="store-banner">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600" alt="Bannière Karnash Drul Fashion">
+                    <div class="store-avatar">KDF</div>
+                </div>
+                <div class="store-body">
+                    <h3 class="store-name">Karnash Drul Fashion</h3>
+                    <p class="store-desc">Chaussures de luxe fait main, maroquinerie premium et accessoires d'exception.</p>
+                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 KARNASH MARKETPLACE DE LA MODE - Tous droits réservés.</p>
+    </footer>
+</footer>
+
+<script>
+    function rafraichirCompteurPanier() {
+        let nbArticles = localStorage.getItem('compteurPanier') || 0;
+        const badge = document.getElementById('cart-count') || document.querySelector('.badge');
+        if (badge) {
+            badge.innerText = nbArticles;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', rafraichirCompteurPanier);
+</script>
+
+</body>
+</html>
