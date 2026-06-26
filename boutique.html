@@ -1,19 +1,65 @@
-<input type="text" id="productName" placeholder="Nom">
-<input type="number" id="productPrice" placeholder="Prix">
-<textarea id="productDesc" placeholder="Description"></textarea>
-<button onclick="publier()">Mettre en vente</button>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Karnash Market - Espace Vendeur</title>
+    <!-- Ajoute ici tes anciens liens CSS / Design -->
+</head>
+<body>
 
-<script type="module">
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
-    // (Utilise la même config Firebase que ci-dessus)
-    
-    window.publier = function() {
-        const db = getDatabase();
-        push(ref(db, 'produits/'), {
-            nom: document.getElementById('productName').value,
-            prix: document.getElementById('productPrice').value,
-            description: document.getElementById('productDesc').value
+    <!-- Ton formulaire original -->
+    <div class="vendeur-container">
+        <h1>Publier un article</h1>
+        <input type="text" id="productName" placeholder="Nom du produit">
+        <input type="number" id="productPrice" placeholder="Prix ($)">
+        <textarea id="productDesc" placeholder="Description du produit"></textarea>
+        <button id="btnPublier">Mettre en vente</button>
+    </div>
+
+    <!-- Script de Synchronisation Fusionné -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+        // Configuration Firebase (Issue de ton image 4)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
+            authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
+            projectId: "karnash-marketplace-de-la-mode",
+            storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
+            messagingSenderId: "94247832680",
+            appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // La fonction de publication avec ton design
+        document.getElementById('btnPublier').addEventListener('click', () => {
+            const nom = document.getElementById('productName').value;
+            const prix = document.getElementById('productPrice').value;
+            const desc = document.getElementById('productDesc').value;
+
+            if(nom === "" || prix === "") {
+                alert("Veuillez remplir le nom et le prix !");
+                return;
+            }
+
+            push(ref(db, 'produits/'), {
+                nom: nom,
+                prix: prix,
+                description: desc,
+                date: new Date().toISOString()
+            }).then(() => {
+                alert("Produit synchronisé sur votre marketplace !");
+                // Optionnel : vider le formulaire
+                document.getElementById('productName').value = "";
+                document.getElementById('productPrice').value = "";
+                document.getElementById('productDesc').value = "";
+            }).catch((error) => {
+                alert("Erreur de synchronisation : " + error.message);
+            });
         });
-        alert("Publié sur le serveur !");
-    };
-</script>
+    </script>
+</body>
+</html>
