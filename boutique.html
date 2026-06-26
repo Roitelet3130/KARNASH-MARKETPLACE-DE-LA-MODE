@@ -13,6 +13,15 @@
             --text-color: #2d3436;
             --border-color: #dfe6e9;
         }
+        <div class="sidebar">
+    <a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a>
+    <a href="produits.html"><i class="fa-solid fa-box"></i> Mes Articles</a>
+    <a href="parametres.html"><i class="fa-solid fa-gear"></i> Paramètres</a>
+    
+    <a href="connexion.html" onclick="localStorage.clear();" style="color: red; text-decoration: none; margin-top: 30px; display: block;">
+        <i class="fa-solid fa-sign-out-alt"></i> Se déconnecter
+    </a>
+</div>
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--primary-bg);
