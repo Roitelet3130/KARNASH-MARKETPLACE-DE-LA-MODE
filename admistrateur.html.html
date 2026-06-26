@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <script>
+    // Ce code vérifie si l'utilisateur est connecté et si c'est bien un vendeur
+    if (localStorage.getItem('userRole') !== 'vendeur') {
+        // S'il n'est pas vendeur, on le renvoie immédiatement sur la page de connexion
+        window.location.href = 'connexion.html';
+    }
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin | Karnash Marketplace de la mode</title>
@@ -112,8 +119,7 @@
             <li><a href="#"><i class="fa-solid fa-store"></i> Valider Boutiques</a></li>
             <li><a href="#"><i class="fa-solid fa-users"></i> Utilisateurs</a></li>
             <li><a href="#"><i class="fa-solid fa-chart-line"></i> Flux Financier</a></li>
-            <li style="margin-top: 60px;"><a href="../index.html" style="color: #ff4757;"><i class="fa-solid fa-lock"></i> Déconnexion</a></li>
-        </ul>
+         <li style="margin-top: 60px;"><a href="connexion.html" onclick="localStorage.clear();" style="color: #ff4757;"><i class="fa-solid fa-sign-out-alt"></i> Déconnexion</a></li>
     </div>
 
     <div class="main-content">
