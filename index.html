@@ -3,809 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vogue Marketplace | Accueil Catalogue</title>
+    <title>KARNASH MARKETPLACE DE LA MODE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary-bg: #f4f5f7;
             --card-bg: #ffffff;
             --accent-purple: #6c5ce7;
             --text-color: #2d3436;
-            --border-color: #dfe6e9;
-            <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion | Vogue</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-bg: #f4f5f7;
-            --card-bg: #ffffff;
-            --accent-purple: #6c5ce7;
-            --text-color: #2d3436;
-            --border-color: #dfe6e9;
-            --success-color: #2ecc71;
+            --navbar-bg: #ffffff;
         }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--primary-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
-        .auth-container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-        .auth-header { text-align: center; margin-bottom: 30px; }
-        .auth-header img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px; }
-        .auth-header h2 { margin: 0 0 10px 0; font-size: 26px; }
-        .auth-header p { color: #7f8c8d; margin: 0; font-size: 14px; }
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion | Vogue</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-bg: #f4f5f7;
-            --card-bg: #ffffff;
-            --accent-purple: #6c5ce7;
-            --text-color: #2d3436;
-            --border-color: #dfe6e9;
-            --success-color: #2ecc71;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--primary-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .auth-container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-        .auth-header { text-align: center; margin-bottom: 30px; }
-        .auth-header img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px; }
-        .auth-header h2 { margin: 0 0 10px 0; font-size: 26px; }
-        .auth-header p { color: #7f8c8d; margin: 0; font-size: 14px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-        .input-wrap { position: relative; }
-        .input-wrap i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b2bec3; }
-        .form-control {
-            width: 100%; padding: 12px 12px 12px 45px;
-            border: 1px solid #dfe6e9; border-radius: 8px; font-size: 14px; box-sizing: border-box;
-            outline: none;
-        }
-        .form-control:focus { border-color: var(--accent-purple); }
-        
-        .forgot-link-container { text-align: right; margin-bottom: 20px; }
-        .forgot-link-container a { color: var(--accent-purple); text-decoration: none; font-size: 12px; }
-        
-        .btn-auth {
-            width: 100%; padding: 12px; background-color: var(--accent-purple);
-            color: white; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-auth:hover { background-color: #5b4cc4; }
-        .auth-footer { text-align: center; margin-top: 20px; font-size: 14px; }
-        .auth-footer a { color: var(--accent-purple); text-decoration: none; font-weight: bold; }
 
-        /* --- STYLES DU MESSAGE DE BIENVENUE (MODAL CONNEXION) --- */
-        .success-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); display: flex;
-            justify-content: center; align-items: center; z-index: 999;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .success-modal.active { opacity: 1; pointer-events: auto; }
-        .modal-box {
-            background: white; padding: 35px; border-radius: 16px;
-            text-align: center; max-width: 380px; width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            transform: scale(0.7); transition: transform 0.3s ease;
-        }
-        .success-modal.active .modal-box { transform: scale(1); }
-        .modal-icon {
-            width: 65px; height: 65px; background: #e1f5fe; color: var(--accent-purple);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 28px; margin: 0 auto 20px auto;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-
-<div class="auth-container">
-    <div class="auth-header">
-        <img src="logo.png" alt="Logo Vogue" onerror="this.style.display='none'"> 
-        <h2>Bon retour !</h2>
-        <p>Connectez-vous à votre espace Vogue</p>
-    </div>
-
-    <form id="directLoginForm">
-        <div class="form-group">
-            <label>Adresse Email</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Mot de passe</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-            </div>
-        </div>
-
-        <div class="forgot-link-container">
-            <a href="#" id="forgot-password">Mot de passe oublié ?</a>
-        </div>
-
-        <button type="submit" class="btn-auth">Se connecter</button>
-    </form>
-
-    <div class="auth-footer">
-        Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a>
-    </div>
-</div>
-
-<div class="success-modal" id="loginSuccessModal">
-    <div class="modal-box">
-        <div class="modal-icon">
-            <i class="fa-solid fa-door-open"></i>
-        </div>
-        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Connexion Réussie !</h3>
-        <p style="color: #7f8c8d; font-size: 14px; line-height: 1.5; margin: 0 0 10px 0;">
-            Ravi de vous revoir sur <br><strong style="color: var(--accent-purple);">KARNASH MARKETPLACE DE LA MODE</strong>.
-        </p>
-        <p id="welcomeUserMessage" style="color: #2ecc71; font-size: 14px; font-weight: bold; margin: 15px 0 0 0;">
-            Préparation de votre espace en cours...
-        </p>
-    </div>
-</div>
-
-<script>
-document.getElementById('directLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const emailSaisi = document.getElementById('email').value.trim().toLowerCase();
-    const passwordSaisi = document.getElementById('password').value.trim();
-
-    // --- 1. COMPTES INTÉGRÉS EN DUR ---
-    const adminEmail = "admin@vogue.com";
-    const adminPassword = "1234";
-
-    const vendeurDefautEmail = "roiteletnzau611@gmail.com";
-    const vendeurDefautPassword = "1234";
-
-    // --- 2. RÉCUPÉRATION DU COMPTE CRÉÉ À L'INSCRIPTION ---
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let compteInscrit = null;
-    if (compteInscritRaw) {
-        compteInscrit = JSON.parse(compteInscritRaw);
-    }
-
-    let redirectionUrl = "";
-    let userNameDisplay = "";
-
-    // --- 3. TEST DE VALIDATION DES IDENTIFIANTS ---
-    
-    // Cas A : Le compte créé via inscription.html
-    if (compteInscrit && emailSaisi === compteInscrit.email && passwordSaisi === compteInscrit.password) {
-        localStorage.setItem('userRole', compteInscrit.role);
-        localStorage.setItem('userName', compteInscrit.fullName);
-        userNameDisplay = compteInscrit.fullName;
-        redirectionUrl = (compteInscrit.role === 'vendeur') ? 'boutique.html' : 'index.html';
-    }
-    // Cas B : Ton compte vendeur par défaut
-    else if (emailSaisi === vendeurDefautEmail && passwordSaisi === vendeurDefautPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        localStorage.setItem('userName', "Roitelet N'zau");
-        userNameDisplay = "Roitelet N'zau";
-        redirectionUrl = 'boutique.html';
-    }
-    // Cas C : Le compte Super Administrateur général
-    else if (emailSaisi === adminEmail && passwordSaisi === adminPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        userNameDisplay = "Super Administrateur";
-        redirectionUrl = 'administrateur.html.html';
-    }
-    // Cas D : Erreur d'identifiants
-    else {
-        alert("Identifiants incorrects. Veuillez réessayer.");
-        return; // On stoppe tout
-    }
-
-    // --- 4. AFFICHAGE DU MESSAGE ET REDIRECTION FLUIDE ---
-    document.getElementById('welcomeUserMessage').innerText = "Bienvenue, " + userNameDisplay + " ! ✨";
-    document.getElementById('loginSuccessModal').classList.add('active');
-
-    // On attend exactement 2 secondes pour laisser le message visible, puis on redirige
-    setTimeout(function() {
-        window.location.href = redirectionUrl;
-    }, 2000);
-});
-
-// Mot de passe oublié intelligent
-document.getElementById('forgot-password').addEventListener('click', function(e) {
-    e.preventDefault();
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let msg = "🔑 Rappel des accès configurés :\n\n• Vendeur par défaut : roiteletnzau611@gmail.com (Mdp: 1234)\n• Admin : admin@vogue.com (Mdp: 1234)";
-    
-    if (compteInscritRaw) {
-        const c = JSON.parse(compteInscritRaw);
-        msg += `\n\n• Dernier utilisateur inscrit via le site : ${c.email} (Mdp: ${c.password} - Rôle: ${c.role})`;
-    }
-    alert(msg);
-});
-</script>
-</body>
-</html>
-            
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-        .input-wrap { position: relative; }
-        .input-wrap i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b2bec3; }
-        .form-control {
-            width: 100%; padding: 12px 12px 12px 45px;
-            border: 1px solid #dfe6e9; border-radius: 8px; font-size: 14px; box-sizing: border-box;
-            outline: none;
-        }
-        .form-control:focus { border-color: var(--accent-purple); }
-        
-        .forgot-link-container { text-align: right; margin-bottom: 20px; }
-        .forgot-link-container a { color: var(--accent-purple); text-decoration: none; font-size: 12px; }
-        
-        .btn-auth {
-            width: 100%; padding: 12px; background-color: var(--accent-purple);
-            color: white; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-auth:hover { background-color: #5b4cc4; }
-        .auth-footer { text-align: center; margin-top: 20px; font-size: 14px; }
-        .auth-footer a { color: var(--accent-purple); text-decoration: none; font-weight: bold; }
-
-        /* --- STYLES DU MESSAGE DE BIENVENUE (MODAL CONNEXION) --- */
-        .success-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); display: flex;
-            justify-content: center; align-items: center; z-index: 999;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .success-modal.active { opacity: 1; pointer-events: auto; }
-        .modal-box {
-            background: white; padding: 35px; border-radius: 16px;
-            text-align: center; max-width: 380px; width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            transform: scale(0.7); transition: transform 0.3s ease;
-        }
-        .success-modal.active .modal-box { transform: scale(1); }
-        .modal-icon {
-            width: 65px; height: 65px; background: #e1f5fe; color: var(--accent-purple);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 28px; margin: 0 auto 20px auto;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-
-<div class="auth-container">
-    <div class="auth-header">
-        <img src="logo.png" alt="Logo Vogue" onerror="this.style.display='none'"> 
-        <h2>Bon retour !</h2>
-        <p>Connectez-vous à votre espace Vogue</p>
-    </div>
-
-    <form id="directLoginForm">
-        <div class="form-group">
-            <label>Adresse Email</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Mot de passe</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-            </div>
-        </div>
-
-        <div class="forgot-link-container">
-            <a href="#" id="forgot-password">Mot de passe oublié ?</a>
-        </div>
-
-        <button type="submit" class="btn-auth">Se connecter</button>
-    </form>
-
-    <div class="auth-footer">
-        Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a>
-    </div>
-</div>
-
-<div class="success-modal" id="loginSuccessModal">
-    <div class="modal-box">
-        <div class="modal-icon">
-            <i class="fa-solid fa-door-open"></i>
-        </div>
-        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Connexion Réussie !</h3>
-        <p style="color: #7f8c8d; font-size: 14px; line-height: 1.5; margin: 0 0 10px 0;">
-            Ravi de vous revoir sur <br><strong style="color: var(--accent-purple);">KARNASH MARKETPLACE DE LA MODE</strong>.
-        </p>
-        <p id="welcomeUserMessage" style="color: #2ecc71; font-size: 14px; font-weight: bold; margin: 15px 0 0 0;">
-            Préparation de votre espace en cours...
-        </p>
-    </div>
-</div>
-
-<script>
-document.getElementById('directLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const emailSaisi = document.getElementById('email').value.trim().toLowerCase();
-    const passwordSaisi = document.getElementById('password').value.trim();
-
-    // --- 1. COMPTES INTÉGRÉS EN DUR ---
-    const adminEmail = "admin@vogue.com";
-    const adminPassword = "1234";
-
-    const vendeurDefautEmail = "roiteletnzau611@gmail.com";
-    const vendeurDefautPassword = "1234";
-
-    // --- 2. RÉCUPÉRATION DU COMPTE CRÉÉ À L'INSCRIPTION ---
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let compteInscrit = null;
-    if (compteInscritRaw) {
-        compteInscrit = JSON.parse(compteInscritRaw);
-    }
-
-    let redirectionUrl = "";
-    let userNameDisplay = "";
-
-    // --- 3. TEST DE VALIDATION DES IDENTIFIANTS ---
-    
-    // Cas A : Le compte créé via inscription.html
-    if (compteInscrit && emailSaisi === compteInscrit.email && passwordSaisi === compteInscrit.password) {
-        localStorage.setItem('userRole', compteInscrit.role);
-        localStorage.setItem('userName', compteInscrit.fullName);
-        userNameDisplay = compteInscrit.fullName;
-        redirectionUrl = (compteInscrit.role === 'vendeur') ? 'boutique.html' : 'index.html';
-    }
-    // Cas B : Ton compte vendeur par défaut
-    else if (emailSaisi === vendeurDefautEmail && passwordSaisi === vendeurDefautPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        localStorage.setItem('userName', "Roitelet N'zau");
-        userNameDisplay = "Roitelet N'zau";
-        redirectionUrl = 'boutique.html';
-    }
-    // Cas C : Le compte Super Administrateur général
-    else if (emailSaisi === adminEmail && passwordSaisi === adminPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        userNameDisplay = "Super Administrateur";
-        redirectionUrl = 'administrateur.html.html';
-    }
-    // Cas D : Erreur d'identifiants
-    else {
-        alert("Identifiants incorrects. Veuillez réessayer.");
-        return; // On stoppe tout
-    }
-
-    // --- 4. AFFICHAGE DU MESSAGE ET REDIRECTION FLUIDE ---
-    document.getElementById('welcomeUserMessage').innerText = "Bienvenue, " + userNameDisplay + " ! ✨";
-    document.getElementById('loginSuccessModal').classList.add('active');
-
-    // On attend exactement 2 secondes pour laisser le message visible, puis on redirige
-    setTimeout(function() {
-        window.location.href = redirectionUrl;
-    }, 2000);
-});
-
-// Mot de passe oublié intelligent
-document.getElementById('forgot-password').addEventListener('click', function(e) {
-    e.preventDefault();
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let msg = "🔑 Rappel des accès configurés :\n\n• Vendeur par défaut : roiteletnzau611@gmail.com (Mdp: 1234)\n• Admin : admin@vogue.com (Mdp: 1234)";
-    
-    if (compteInscritRaw) {
-        const c = JSON.parse(compteInscritRaw);
-        msg += `\n\n• Dernier utilisateur inscrit via le site : ${c.email} (Mdp: ${c.password} - Rôle: ${c.role})`;
-    }
-    alert(msg);
-});
-</script>
-</body>
-</html>
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--primary-bg);
-            margin: 0; padding: 0; color: var(--text-color);
-        }
+        /* --- NAVIGATION SUPERIEURE --- */
         header {
-            background: var(--card-bg);
-            padding: 15px 30px;
-            display: flex; justify-content: space-between; align-items: center;
+            background-color: var(--navbar-bg);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            padding: 15px 30px;
         }
-        .logo { font-size: 24px; font-weight: bold; color: var(--accent-purple); text-decoration: none; }
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .cart-icon { position: relative; font-size: 20px; color: var(--text-color); text-decoration: none; }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative; /* Très important pour positionner le panier rétractable */
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent-purple);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .user-welcome {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        /* Bouton Panier */
+        .cart-icon-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-color);
+            cursor: pointer;
+            position: relative;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .cart-icon-btn:hover {
+            color: var(--accent-purple);
+        }
+
         .cart-count {
-            position: absolute; top: -8px; right: -10px;
-            background: #e74c3c; color: white; font-size: 11px;
-            padding: 2px 6px; border-radius: 50%; font-weight: bold;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4757;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .main-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .welcome-text { margin-bottom: 30px; }
-        
-        /* Grid des produits */
+
+        /* Bouton Déconnexion épuré */
+        .logout-link {
+            color: #ff4757;
+            text-decoration: none;
+            font-size: 18px;
+            transition: opacity 0.2s;
+        }
+        .logout-link:hover {
+            opacity: 0.8;
+        }
+
+        /* --- 🛒 LE PANIER FLOTTANT (DESIGN REFAIT ET PROPRE) --- */
+        .cart-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 20px;
+            display: none; /* Masqué au démarrage */
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .cart-dropdown.active {
+            display: block; /* S'affiche dynamiquement au clic */
+        }
+
+        .cart-dropdown h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            border-bottom: 2px solid #f4f5f7;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        .cart-item-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 13px;
+        }
+
+        .cart-item-info span {
+            color: var(--accent-purple);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .cart-total {
+            margin-top: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            color: var(--text-color);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-checkout:hover {
+            background: #5b4cc4;
+        }
+
+        /* --- CONTENU PRINCIPAL & GRILLE --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h1 {
+            font-size: 28px;
+            margin: 0 0 10px 0;
+        }
+
+        .welcome-section p {
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        /* Grille des Produits */
         .products-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
         }
+
         .product-card {
-            background: var(--card-bg); border-radius: 12px; overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s;
-            position: relative; display: flex; flex-direction: column;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .product-card:hover { transform: translateY(-50px); }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; }
-        .product-info { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+
+        .product-card:hover {
+            transform: translateY(-50px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .product-image-wrapper {
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .shop-tag {
-            background: #eef2f3; color: #7f8c8d; font-size: 11px; font-weight: bold;
-            padding: 4px 8px; border-radius: 4px; align-self: flex-start; margin-bottom: 8px;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(108, 92, 231, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
         }
-        .product-title { font-size: 16px; margin: 0 0 8px 0; font-weight: 600; }
-        .product-desc { font-size: 13px; color: #7f8c8d; margin: 0 0 15px 0; flex: 1; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { font-size: 18px; font-weight: bold; color: var(--accent-purple); }
+
+        .product-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 16px;
+            margin: 0 0 6px 0;
+            font-weight: bold;
+        }
+
+        .product-desc {
+            color: #7f8c8d;
+            font-size: 13px;
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
         .btn-buy {
-            background: var(--accent-purple); color: white; border: none;
-            padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;
+            background-color: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s;
         }
-        .btn-buy:hover { background: #5b4cc4; }
+
+        .btn-buy:hover {
+            background-color: #5b4cc4;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="#" class="logo"><i class="fa-solid fa-bag-shopping"></i> VOGUE</a>
-    <div class="nav-right">
-        <span id="clientWelcome" style="font-weight: 600;">Bonjour, Invité</span>
-        <a href="#" class="cart-icon">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-count" id="cartCount">0</span>
-        </a>
-        <a href="connexion.html" style="color: #7f8c8d; text-decoration: none; font-size: 14px;"><i class="fa-solid fa-sign-out-alt"></i></a>
-    </div>
-</header>
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-bag-shopping"></i> Vogue</a>
+            
+            <div class="nav-right">
+                <span class="user-welcome" id="userGreeting">Bonjour, Invité</span>
+                
+                <button class="cart-icon-btn" id="cartToggleButton">
+                    <i class="fa-solid fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
 
-<div class="main-container">
-    <div class="welcome-text">
-        <h1 style="margin: 0 0 5px 0;">Découvrez toutes les Boutiques</h1>
-        <p style="margin: 0; color: #7f8c8d;">Faites vos achats en direct auprès de nos créateurs locaux de Kinshasa.</p>
-    </div>
+                <a href="connexion.html" onclick="localStorage.clear();" class="logout-link" title="Se déconnecter">
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                </a>
+            </div>
 
-    <div class="products-grid" id="globalCatalogue">
-        </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Afficher le nom du client connecté
-    const activeUserName = localStorage.getItem('userName') || "Client";
-    document.getElementById('clientWelcome').innerText = "Bonjour, " + activeUserName;
-
-    // 2. Charger et afficher TOUTES les publications de TOUTES les boutiques
-    renderCatalogue();
-
-    // 3. Gestion simple du compteur de panier
-    let currentCartCount = 0;
-
-    window.ajouterAuPanier = function(productName, shopName) {
-        currentCartCount++;
-        document.getElementById('cartCount').innerText = currentCartCount;
-        alert(`🛒 "${productName}" (de la boutique ${shopName}) a été ajouté à votre panier !`);
-    };
-
-    function renderCatalogue() {
-        const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-        const container = document.getElementById('globalCatalogue');
-        container.innerHTML = '';
-
-        if (allProducts.length === 0) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
-                    <i class="fa-solid fa-store-slash" style="font-size: 40px; margin-bottom: 10px;"></i>
-                    <p>Aucun article n'est en vente pour le moment. Les boutiques préparent leurs collections !</p>
+            <div class="cart-dropdown" id="cartDropdown">
+                <h3>Mon Panier <i class="fa-solid fa-basket-shopping" style="color: var(--accent-purple);"></i></h3>
+                <div id="cartItemsList">
+                    </div>
+                <div class="cart-total">
+                    <span>Total global :</span>
+                    <span id="cartTotalAmount">0 $</span>
                 </div>
-            `;
-            return;
-        }
+                <button class="btn-checkout" onclick="validerLaCommande()">Commander maintenant</button>
+            </div>
+        </div>
+    </header>
 
-        // On boucle sur TOUS les produits sans distinction de boutique
-        allProducts.forEach(product => {
-            container.innerHTML += `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-info">
-                        <span class="shop-tag"><i class="fa-solid fa-shop"></i> ${product.shopName}</span>
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-desc">${product.desc || 'Aucune description disponible.'}</p>
-                        <div class="price-row">
-                            <span class="price">${product.price} $</span>
-                            <button class="btn-buy" onclick="ajouterAuPanier('${product.name.replace(/'/g, "\\'")}', '${product.shopName.replace(/'/g, "\\'")}')">
-                                <i class="fa-solid fa-cart-plus"></i> Acheter
-                            </button>
+    <div class="main-container">
+        <div class="welcome-section">
+            <h1>Découvrez toutes les Boutiques</h1>
+            <p>Faites vos achats en direct auprès de nos créateurs locaux de Kinshasa.</p>
+        </div>
+
+        <div class="products-grid" id="globalCatalogue">
+            </div>
+    </div>
+
+    <script>
+        // Variables mémoires globales synchronisées
+        let panier = JSON.parse(localStorage.getItem('panier_vogue')) || [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Afficher le nom de l'utilisateur connecté en haut à droite
+            const savedName = localStorage.getItem('userName');
+            const greetingElement = document.getElementById('userGreeting');
+            if (savedName && greetingElement) {
+                greetingElement.innerText = "Bonjour, " + savedName;
+            }
+
+            // 2. Interrupteur pour Ouvrir / Fermer le panier au clic
+            const cartBtn = document.getElementById('cartToggleButton');
+            const dropdown = document.getElementById('cartDropdown');
+            if (cartBtn && dropdown) {
+                cartBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('active');
+                });
+                
+                // Fermer le panier si on clique n'importe où ailleurs sur l'écran
+                document.addEventListener('click', function() {
+                    dropdown.classList.remove('active');
+                });
+                dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Évite la fermeture quand on clique dedans
+                });
+            }
+
+            // 3. Lancer le chargement initial du catalogue et du panier
+            renderCatalogue();
+            afficherLePanier();
+        });
+
+        // 4. Fonction pour afficher la liste des vêtements mis en ligne par les vendeurs
+        function renderCatalogue() {
+            const container = document.getElementById('globalCatalogue');
+            if (!container) return;
+
+            const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+
+            if (allProducts.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #7f8c8d;">
+                        <i class="fa-solid fa-store-slash" style="font-size: 50px; margin-bottom: 15px; color: #b2bec3;"></i>
+                        <p style="margin:0; font-size:16px;">Aucun article n'est en vente pour le moment.</p>
+                        <p style="margin:5px 0 0 0; font-size:13px; color:#b2bec3;">Les boutiques préparent leurs collections !</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            allProducts.forEach(product => {
+                // Utilisation d'une image générique si aucune photo n'est disponible
+                const finalImg = product.image || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500';
+                const shopDisplay = product.shopName || 'Boutique Vogue';
+
+                container.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <span class="shop-tag"><i class="fa-solid fa-shop"></i> ${shopDisplay}</span>
+                            <img src="${finalImg}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-desc">${product.description || 'Aucune description disponible.'}</p>
+                            <div class="product-footer">
+                                <span class="product-price">${product.price} $</span>
+                                <button class="btn-buy" onclick="ajouterAuPanier('${product.name.replace(/'/g, "\\'")}', '${product.price}', '${shopDisplay.replace(/'/g, "\\'")}')">
+                                    <i class="fa-solid fa-cart-plus"></i> Acheter
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-        });
-    }
-});
-    <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion | Vogue</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-bg: #f4f5f7;
-            --card-bg: #ffffff;
-            --accent-purple: #6c5ce7;
-            --text-color: #2d3436;
-            --border-color: #dfe6e9;
-            --success-color: #2ecc71;
+                `;
+            });
         }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--primary-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+
+        // 5. Fonction d'ajout direct d'un produit au panier
+        window.ajouterAuPanier = function(productName, price, shopName) {
+            const nouvelArticle = {
+                name: productName,
+                price: price,
+                shop: shopName
+            };
+
+            panier.push(nouvelArticle);
+            localStorage.setItem('panier_vogue', JSON.stringify(panier));
+            
+            // Notification immédiate propre et rafraîchissement
+            alert(`🛒 "${productName}" (de la boutique ${shopName}) a été ajouté à votre panier !`);
+            afficherLePanier();
+        };
+
+        // 6. Fonction pour dessiner les éléments à l'intérieur du panier
+        function afficherLePanier() {
+            const listContainer = document.getElementById('cartItemsList');
+            const totalContainer = document.getElementById('cartTotalAmount');
+            const badgeCount = document.getElementById('cartCount');
+
+            if (!listContainer || !totalContainer) return;
+
+            listContainer.innerHTML = "";
+            let totalGeneral = 0;
+
+            // Ajustement du badge numérique rouge
+            if (badgeCount) {
+                badgeCount.innerText = panier.length;
+            }
+
+            if (panier.length === 0) {
+                listContainer.innerHTML = "<p style='color:#7f8c8d; text-align:center; margin: 20px 0; font-size:13px;'>Votre panier est vide.</p>";
+                totalContainer.innerText = "0 $";
+                return;
+            }
+
+            panier.forEach((item, index) => {
+                totalGeneral += parseFloat(item.price) || 0;
+                listContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <span>${item.price} $ <small style="color:#b2bec3; font-weight:normal;">(${item.shop})</small></span>
+                        </div>
+                        <button class="btn-remove" onclick="retirerDuPanier(${index})" title="Supprimer"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+            });
+
+            totalContainer.innerText = totalGeneral + " $";
         }
-        .auth-container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-        .auth-header { text-align: center; margin-bottom: 30px; }
-        .auth-header img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px; }
-        .auth-header h2 { margin: 0 0 10px 0; font-size: 26px; }
-        .auth-header p { color: #7f8c8d; margin: 0; font-size: 14px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-        .input-wrap { position: relative; }
-        .input-wrap i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b2bec3; }
-        .form-control {
-            width: 100%; padding: 12px 12px 12px 45px;
-            border: 1px solid #dfe6e9; border-radius: 8px; font-size: 14px; box-sizing: border-box;
-            outline: none;
-        }
-        .form-control:focus { border-color: var(--accent-purple); }
-        
-        .forgot-link-container { text-align: right; margin-bottom: 20px; }
-        .forgot-link-container a { color: var(--accent-purple); text-decoration: none; font-size: 12px; }
-        
-        .btn-auth {
-            width: 100%; padding: 12px; background-color: var(--accent-purple);
-            color: white; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-auth:hover { background-color: #5b4cc4; }
-        .auth-footer { text-align: center; margin-top: 20px; font-size: 14px; }
-        .auth-footer a { color: var(--accent-purple); text-decoration: none; font-weight: bold; }
 
-        /* --- STYLES DU MESSAGE DE BIENVENUE (MODAL CONNEXION) --- */
-        .success-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); display: flex;
-            justify-content: center; align-items: center; z-index: 999;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .success-modal.active { opacity: 1; pointer-events: auto; }
-        .modal-box {
-            background: white; padding: 35px; border-radius: 16px;
-            text-align: center; max-width: 380px; width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            transform: scale(0.7); transition: transform 0.3s ease;
-        }
-        .success-modal.active .modal-box { transform: scale(1); }
-        .modal-icon {
-            width: 65px; height: 65px; background: #e1f5fe; color: var(--accent-purple);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 28px; margin: 0 auto 20px auto;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
+        // 7. Fonction pour vider un élément ciblé du panier
+        window.retirerDuPanier = function(index) {
+            panier.splice(index, 1);
+            localStorage.setItem('panier_vogue', JSON.stringify(panier));
+            afficherLePanier();
+        };
 
-<div class="auth-container">
-    <div class="auth-header">
-        <img src="logo.png" alt="Logo Vogue" onerror="this.style.display='none'"> 
-        <h2>Bon retour !</h2>
-        <p>Connectez-vous à votre espace Vogue</p>
-    </div>
-
-    <form id="directLoginForm">
-        <div class="form-group">
-            <label>Adresse Email</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Mot de passe</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-            </div>
-        </div>
-
-        <div class="forgot-link-container">
-            <a href="#" id="forgot-password">Mot de passe oublié ?</a>
-        </div>
-
-        <button type="submit" class="btn-auth">Se connecter</button>
-    </form>
-
-    <div class="auth-footer">
-        Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a>
-    </div>
-</div>
-
-<div class="success-modal" id="loginSuccessModal">
-    <div class="modal-box">
-        <div class="modal-icon">
-            <i class="fa-solid fa-door-open"></i>
-        </div>
-        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Connexion Réussie !</h3>
-        <p style="color: #7f8c8d; font-size: 14px; line-height: 1.5; margin: 0 0 10px 0;">
-            Ravi de vous revoir sur <br><strong style="color: var(--accent-purple);">KARNASH MARKETPLACE DE LA MODE</strong>.
-        </p>
-        <p id="welcomeUserMessage" style="color: #2ecc71; font-size: 14px; font-weight: bold; margin: 15px 0 0 0;">
-            Préparation de votre espace en cours...
-        </p>
-    </div>
-</div>
-
-<script>
-document.getElementById('directLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const emailSaisi = document.getElementById('email').value.trim().toLowerCase();
-    const passwordSaisi = document.getElementById('password').value.trim();
-
-    // --- 1. COMPTES INTÉGRÉS EN DUR ---
-    const adminEmail = "admin@vogue.com";
-    const adminPassword = "1234";
-
-    const vendeurDefautEmail = "roiteletnzau611@gmail.com";
-    const vendeurDefautPassword = "1234";
-
-    // --- 2. RÉCUPÉRATION DU COMPTE CRÉÉ À L'INSCRIPTION ---
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let compteInscrit = null;
-    if (compteInscritRaw) {
-        compteInscrit = JSON.parse(compteInscritRaw);
-    }
-
-    let redirectionUrl = "";
-    let userNameDisplay = "";
-
-    // --- 3. TEST DE VALIDATION DES IDENTIFIANTS ---
-    
-    // Cas A : Le compte créé via inscription.html
-    if (compteInscrit && emailSaisi === compteInscrit.email && passwordSaisi === compteInscrit.password) {
-        localStorage.setItem('userRole', compteInscrit.role);
-        localStorage.setItem('userName', compteInscrit.fullName);
-        userNameDisplay = compteInscrit.fullName;
-        redirectionUrl = (compteInscrit.role === 'vendeur') ? 'boutique.html' : 'index.html';
-    }
-    // Cas B : Ton compte vendeur par défaut
-    else if (emailSaisi === vendeurDefautEmail && passwordSaisi === vendeurDefautPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        localStorage.setItem('userName', "Roitelet N'zau");
-        userNameDisplay = "Roitelet N'zau";
-        redirectionUrl = 'boutique.html';
-    }
-    // Cas C : Le compte Super Administrateur général
-    else if (emailSaisi === adminEmail && passwordSaisi === adminPassword) {
-        localStorage.setItem('userRole', 'vendeur');
-        userNameDisplay = "Super Administrateur";
-        redirectionUrl = 'administrateur.html.html';
-    }
-    // Cas D : Erreur d'identifiants
-    else {
-        alert("Identifiants incorrects. Veuillez réessayer.");
-        return; // On stoppe tout
-    }
-
-    // --- 4. AFFICHAGE DU MESSAGE ET REDIRECTION FLUIDE ---
-    document.getElementById('welcomeUserMessage').innerText = "Bienvenue, " + userNameDisplay + " ! ✨";
-    document.getElementById('loginSuccessModal').classList.add('active');
-
-    // On attend exactement 2 secondes pour laisser le message visible, puis on redirige
-    setTimeout(function() {
-        window.location.href = redirectionUrl;
-    }, 2000);
-});
-
-// Mot de passe oublié intelligent
-document.getElementById('forgot-password').addEventListener('click', function(e) {
-    e.preventDefault();
-    const compteInscritRaw = localStorage.getItem('compte_utilisateur');
-    let msg = "🔑 Rappel des accès configurés :\n\n• Vendeur par défaut : roiteletnzau611@gmail.com (Mdp: 1234)\n• Admin : admin@vogue.com (Mdp: 1234)";
-    
-    if (compteInscritRaw) {
-        const c = JSON.parse(compteInscritRaw);
-        msg += `\n\n• Dernier utilisateur inscrit via le site : ${c.email} (Mdp: ${c.password} - Rôle: ${c.role})`;
-    }
-    alert(msg);
-});
-
-</script>
-
+        // 8. Finalisation de l'achat
+        window.validerLaCommande = function() {
+            if (panier.length === 0) {
+                alert("Votre panier est vide ! Ajoutez des articles avant de commander.");
+                return;
+            }
+            alert("🎉 Succès ! Votre commande sur KARNASH MARKETPLACE DE LA MODE a été enregistrée avec succès et envoyée aux créateurs concernés.");
+            
+            // Nettoyage complet après l'achat
+            panier = [];
+            localStorage.removeItem('panier_vogue');
+            document.getElementById('cartDropdown').classList.remove('active');
+            afficherLePanier();
+        };
+    </script>
 </body>
 </html>
