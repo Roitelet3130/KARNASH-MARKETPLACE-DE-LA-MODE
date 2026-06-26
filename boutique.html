@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Vendeur | KARNASH MARKETPLACE</title>
+    <title>Espace Vendeur | Vogue</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,7 +12,6 @@
             --accent-purple: #6c5ce7;
             --text-color: #2d3436;
             --border-color: #dfe6e9;
-            --success-color: #2ecc71;
         }
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -75,17 +74,12 @@
         }
         .btn-submit:hover { background: #5b4cc4; }
         
-        /* Tableau des articles publiés */
         .table-wrapper { overflow-x: auto; }
-        table {
-            width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;
-        }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
         th, td { padding: 12px; border-bottom: 1px solid var(--border-color); }
         th { background: #f8f9fa; font-weight: 600; }
         .product-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; }
-        .btn-delete {
-            background: none; border: none; color: #ff4757; cursor: pointer; font-size: 16px;
-        }
+        .btn-delete { background: none; border: none; color: #ff4757; cursor: pointer; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -135,15 +129,13 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="myProductsTable">
-                        </tbody>
+                    <tbody id="myProductsTable"></tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <script>
-        // Récupération du nom de la boutique du vendeur connecté
         const compteUtilisateur = JSON.parse(localStorage.getItem('compte_utilisateur')) || {};
         const currentShopName = compteUtilisateur.shopName || "Boutique Vogue";
         
@@ -152,7 +144,6 @@
             afficherMesArticles();
         });
 
-        // Événement lors de la soumission du formulaire
         document.getElementById('publishForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -165,45 +156,32 @@
 
             const reader = new FileReader();
             reader.onloadend = function() {
-                // Création de l'objet produit complet
                 const newProduct = {
-                    id: Date.now(), // ID unique pour pouvoir le supprimer facilement
+                    id: Date.now(),
                     name: name,
                     price: price,
                     description: description,
-                    image: reader.result, // Image convertie en texte Base64
-                    shopName: currentShopName // Lié à la boutique actuelle
+                    image: reader.result,
+                    shopName: currentShopName
                 };
 
-                // --- LOGIQUE DE STOCKAGE ACCUMULATIVE ---
-                // On récupère les produits déjà existants sur la marketplace sans les effacer
                 let globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-                
-                // On AJOUTE le nouveau produit à la suite des autres (.push)
                 globalProducts.push(newProduct);
-                
-                // On réenregistre la liste augmentée
                 localStorage.setItem('globalProducts', JSON.stringify(globalProducts));
 
-                // Réinitialisation du formulaire pour le prochain article
                 document.getElementById('publishForm').reset();
                 alert(`✨ Succès ! L'article "${name}" a été ajouté au catalogue général.`);
-                
-                // Rafraîchir le tableau d'affichage
                 afficherMesArticles();
             };
 
             reader.readAsDataURL(imageFile);
         });
 
-        // Fonction pour afficher uniquement les articles publiés par ce vendeur spécifique
         function afficherMesArticles() {
             const tbody = document.getElementById('myProductsTable');
             if (!tbody) return;
 
             const globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-            
-            // On filtre pour ne garder que les articles de la boutique en cours
             const myProducts = globalProducts.filter(p => p.shopName === currentShopName);
 
             if (myProducts.length === 0) {
@@ -220,7 +198,7 @@
                         <td style="color:var(--accent-purple); font-weight:bold;">${product.price} $</td>
                         <td style="color:#7f8c8d; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${product.description || '-'}</td>
                         <td>
-                            <button class="btn-delete" onclick="supprimerArticle(${product.id})" title="Retirer de la vente">
+                            <button class="btn-delete" onclick="supprimerArticle(${product.id})">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </td>
@@ -229,14 +207,10 @@
             });
         }
 
-        // Fonction pour retirer un article du marché global
         window.supprimerArticle = function(productId) {
             if (confirm("Voulez-vous vraiment retirer cet article de la vente ?")) {
                 let globalProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
-                
-                // On filtre pour enlever uniquement l'article qui possède cet ID unique
                 globalProducts = globalProducts.filter(p => p.id !== productId);
-                
                 localStorage.setItem('globalProducts', JSON.stringify(globalProducts));
                 afficherMesArticles();
             }
