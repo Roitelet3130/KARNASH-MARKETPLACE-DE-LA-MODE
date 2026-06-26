@@ -192,7 +192,7 @@
             </div>
 
             <div class="forgot-password">
-                <a href="#">Mot de passe oublié ?</a>
+               <a href="#" id="forgot-password">Mot de passe oublié ?</a>                   
             </div>
 
             <button type="submit" class="btn-auth">Se connecter</button>
@@ -228,6 +228,27 @@
             });
         }
     });
+        // --- SCRIPT DE RÉCUPÉRATION DU MOT DE PASSE VENDEUR ---
+const linkForgot = document.getElementById('forgot-password');
+if (linkForgot) {
+    linkForgot.addEventListener('click', function(e) {
+        e.preventDefault(); // Empêche la page de se recharger
+        
+        const emailSaisi = prompt("Veuillez entrer votre adresse e-mail vendeur :");
+        
+        if (emailSaisi) {
+            // Récupère l'adresse et le mot de passe enregistrés (ou ceux par défaut)
+            const vendeurEmailStocke = localStorage.getItem('vendeurEmail') || "roiteletnzau611@gmail.com";
+            const vendeurPasswordStocke = localStorage.getItem('vendeurPassword') || "MetsTonMotDePasseIci"; 
+
+            if (emailSaisi === vendeurEmailStocke) {
+                alert("🔑 Récupération de compte :\n\nVotre mot de passe actuel est : " + vendeurPasswordStocke);
+            } else {
+                alert("❌ Aucune boutique ou compte vendeur n'est enregistré avec cette adresse e-mail.");
+            }
+        }
+    });
+}
 </script>
 
 </body>
