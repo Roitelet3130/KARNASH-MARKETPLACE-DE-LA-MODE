@@ -3,331 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karnash Marketplace de la mode | Toutes les Boutiques</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Mon Espace Vendeur | Vogue</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --primary-color: #1a0933;   
-            --accent-purple: #6a2b83;  
-            --accent-gold: #cca43b;    
-            --bg-light: #f9f8fa;       
-            --text-dark: #2d2438;      
-            --text-muted: #796e85;     
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
-            --transition: all 0.3s ease;
+            --primary-bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --accent-purple: #6c5ce7;
+            --text-color: #2d3436;
+            --border-color: #dfe6e9;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary-bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
         }
-
-        a {
-            text-decoration: none;
-            color: inherit;
+        .vendeur-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-
-        /* --- NAVBAR WITH SMALL LOGO --- */
-        .navbar {
-            background-color: var(--white);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 8%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-img {
-            height: 32px; 
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--primary-color);
-            text-transform: uppercase;
-        }
-
-        .logo-text span {
-            color: var(--accent-gold);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-purple);
-        }
-
-        .nav-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 20px;
-            align-items: center;
-        }
-
-        .nav-icons a:hover {
-            color: var(--accent-purple);
-        }
-
-        .badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background-color: var(--accent-purple);
-            color: var(--white);
-            font-size: 11px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
-
-        /* --- PAGE HEADER --- */
-        .page-header {
-            background: linear-gradient(rgba(26, 9, 51, 0.8), rgba(26, 9, 51, 0.95));
-            color: var(--white);
-            text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 40px;
-        }
-
-        .page-header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .page-header p {
-            color: #e2daf0;
-            font-size: 16px;
-        }
-
-        /* --- GRID & CARDS --- */
-        .section {
-            padding: 0 8% 60px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .store-card {
-            background-color: var(--white);
+        .header-box {
+            background: var(--card-bg);
+            padding: 20px;
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(106, 43, 131, 0.05);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .store-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-        }
-
-        .store-banner {
-            height: 140px;
-            position: relative;
-            background-color: var(--primary-color);
-        }
-
-        .store-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .store-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: var(--white);
-            border: 3px solid var(--accent-gold);
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 22px;
-            box-shadow: var(--shadow);
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            margin-bottom: 25px;
         }
-
-        .store-body {
-            padding: 55px 20px 25px;
+        .shop-info { display: flex; align-items: center; gap: 15px; }
+        .shop-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #eee; }
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        @media(max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } }
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
-
-        .store-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+        .form-control {
+            width: 100%; padding: 10px; border: 1px solid var(--border-color);
+            border-radius: 6px; box-sizing: border-box; font-size: 14px; outline: none;
         }
-
-        .store-desc {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-            height: 42px;
-            overflow: hidden;
+        .form-control:focus { border-color: var(--accent-purple); }
+        .btn-publier {
+            width: 100%; padding: 12px; background: var(--accent-purple);
+            color: white; border: none; border-radius: 6px; font-size: 15px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: var(--transition);
-            width: 100%;
+        .btn-publier:hover { background: #5b4cc4; }
+        .product-item {
+            display: flex; align-items: center; gap: 15px;
+            padding: 10px; border-bottom: 1px solid var(--border-color);
         }
-
-        .btn:hover {
-            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.4);
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 30px 8%;
-            text-align: center;
-            font-size: 14px;
-            border-top: 3px solid var(--accent-gold);
-        }
+        .product-item img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; }
+        .logout-btn { color: #e74c3c; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo-container">
-           <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
-            <a href="index.html" class="logo-text">KARNASH<span>.Marketplace de la mode</span></a>
+<div class="vendeur-container">
+    <div class="header-box">
+        <div class="shop-info">
+            <img id="displayLogo" class="shop-logo" src="https://via.placeholder.com/60" alt="Logo">
+            <div>
+                <h2 id="displayShopName" style="margin:0;">Ma Boutique</h2>
+                <p id="displayVendorName" style="margin:5px 0 0 0; color:#7f8c8d; font-size:14px;">Vendeur Vogue</p>
+            </div>
         </div>
-        <nav class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="catalogue.html">Catalogue</a>
-            <a href="boutiques.html" class="active">Boutiques</a>
-        </nav>
-        <div class="nav-icons">
-            <a href="connexion.html"><i class="fa-regular fa-user"></i></a>
-            <a href="client/favoris.html"><i class="fa-regular fa-heart"></i></a>
-            <a href="panier.html">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="badge">0</span>
-            </a>
-        </div>
-    </header>
-
-    <div class="page-header">
-        <h1>Nos Boutiques Partenaires</h1>
-        <p>Achetez directement auprès des meilleurs créateurs de tendances.</p>
+        <a href="connexion.html" class="logout-btn"><i class="fa-solid fa-sign-out-alt"></i> Déconnexion</a>
     </div>
 
-    <section class="section">
-        <div class="grid">
-            
-            <div class="store-card">
-                <div class="store-banner">
-                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600" alt="Bannière Fashion Kin">
-                    <div class="store-avatar">FK</div>
+    <div class="grid-layout">
+        <div class="card">
+            <h3 style="margin-top:0; color: var(--accent-purple);"><i class="fa-solid fa-plus-circle"></i> Publier un nouvel article</h3>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label>Nom de l'article</label>
+                    <input type="text" id="pName" class="form-control" placeholder="Ex: Chemise Oversize en Lin" required>
                 </div>
-                <div class="store-body">
-                    <h3 class="store-name">Fashion Kin</h3>
-                    <p class="store-desc">Le meilleur du streetwear et de la mode urbaine branchée à Kinshasa.</p>
-                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                <div class="form-group">
+                    <label>Prix (en $ USD)</label>
+                    <input type="number" id="pPrice" class="form-control" placeholder="Ex: 45" required>
                 </div>
-            </div>
-
-            <div class="store-card">
-                <div class="store-banner">
-                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600" alt="Bannière Style Africa">
-                    <div class="store-avatar">SA</div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="pCategory" class="form-control">
+                        <option value="Vêtements">Vêtements</option>
+                        <option value="Chaussures">Chaussures</option>
+                        <option value="Accessoires">Accessoires / Bijoux</option>
+                    </select>
                 </div>
-                <div class="store-body">
-                    <h3 class="store-name">Style Africa</h3>
-                    <p class="store-desc">Mélange moderne et élégant de tissus africains et coupes occidentales.</p>
-                    <a href="boutique.html" class="btn">Visiter la boutique</a>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="pDesc" class="form-control" rows="3" placeholder="Détails de l'article, tailles disponibles..."></textarea>
                 </div>
-            </div>
-
-            <div class="store-card">
-                <div class="store-banner">
-                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=600" alt="Bannière Congo Chic">
-                    <div class="store-avatar">CC</div>
+                <div class="form-group">
+                    <label>Image de l'article</label>
+                    <input type="file" id="pImage" accept="image/*" required>
                 </div>
-                <div class="store-body">
-                    <h3 class="store-name">Congo Chic</h3>
-                    <p class="store-desc">Haute couture et designs uniques haut de gamme en Wax de qualité.</p>
-                    <a href="boutique.html" class="btn">Visiter la boutique</a>
-                </div>
-            </div>
-
-            <div class="store-card">
-                <div class="store-banner">
-                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600" alt="Bannière Karnash Drul Fashion">
-                    <div class="store-avatar">KDF</div>
-                </div>
-                <div class="store-body">
-                    <h3 class="store-name">Karnash Drul Fashion</h3>
-                    <p class="store-desc">Chaussures de luxe fait main, maroquinerie premium et accessoires d'exception.</p>
-                    <a href="boutique.html" class="btn">Visiter la boutique</a>
-                </div>
-            </div>
-
+                <button type="submit" class="btn-publier">Mettre en vente immédiatement</button>
+            </form>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 KARNASH MARKETPLACE DE LA MODE - Tous droits réservés.</p>
-    </footer>
-</footer>
+        <div class="card">
+            <h3 style="margin-top:0;"><i class="fa-solid fa-boxes-stacked"></i> Mes articles en ligne</h3>
+            <div id="myProductsList">
+                </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    function rafraichirCompteurPanier() {
-        let nbArticles = localStorage.getItem('compteurPanier') || 0;
-        const badge = document.getElementById('cart-count') || document.querySelector('.badge');
-        if (badge) {
-            badge.innerText = nbArticles;
-        }
-    }
-    document.addEventListener('DOMContentLoaded', rafraichirCompteurPanier);
-</script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Récupérer les données de la boutique inscrite
+    const registeredUser = JSON.parse(localStorage.getItem('registeredUser')) || {
+        fullName: "Roitelet N'zau",
+        shopName: "Karnash Marketplace",
+        shopLogo: ""
+    };
 
+    document.getElementById('displayShopName').innerText = registeredUser.shopName;
+    document.getElementById('displayVendorName').innerText = "Gérant : " + registeredUser.fullName;
+    if(registeredUser.shopLogo) {
+        document.getElementById('displayLogo').src = registeredUser.shopLogo;
+    }
+
+    // 2. Charger les produits existants
+    displayMyProducts();
+
+    // 3. Soumission du formulaire d'ajout
+    document.getElementById('addProductForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('pName').value.trim();
+        const price = document.getElementById('pPrice').value;
+        const category = document.getElementById('pCategory').value;
+        const desc = document.getElementById('pDesc').value.trim();
+        const imageInput = document.getElementById('pImage').files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+            
+            const newProduct = {
+                id: Date.now(),
+                shopName: registeredUser.shopName,
+                name: name,
+                price: price,
+                category: category,
+                desc: desc,
+                image: reader.result
+            };
+
+            allProducts.push(newProduct);
+            localStorage.setItem('globalProducts', JSON.stringify(allProducts));
+
+            document.getElementById('addProductForm').reset();
+            displayMyProducts();
+        };
+        reader.readAsDataURL(imageInput);
+    });
+
+    function displayMyProducts() {
+        const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+        const container = document.getElementById('myProductsList');
+        container.innerHTML = '';
+
+        // Filtrer pour ne voir que les produits de cette boutique précise
+        const myProducts = allProducts.filter(p => p.shopName === registeredUser.shopName);
+
+        if(myProducts.length === 0) {
+            container.innerHTML = '<p style="color:#7f8c8d; font-style:italic;">Aucun article publié pour le moment.</p>';
+            return;
+        }
+
+        myProducts.forEach(p => {
+            container.innerHTML += `
+                <div class="product-item">
+                    <img src="${p.image}" alt="">
+                    <div style="flex:1;">
+                        <strong style="display:block;">${p.name}</strong>
+                        <span style="font-size:12px; color:#7f8c8d;">Catégorie: ${p.category}</span>
+                    </div>
+                    <span style="font-weight:bold; color:var(--accent-purple);">${p.price} $</span>
+                </div>
+            `;
+        });
+    }
+});
+</script>
 </body>
 </html>
