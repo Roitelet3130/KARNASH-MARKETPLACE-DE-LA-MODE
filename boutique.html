@@ -117,6 +117,29 @@
         </div>
 
         <div class="card">
+            <div style="margin-bottom: 20px; text-align: center;">
+    <button onclick="exporterProduits()" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+        <i class="fa-solid fa-file-export"></i> Exporter mes produits
+    </button>
+</div>
+
+<script>
+    function exporterProduits() {
+        const data = localStorage.getItem('globalProducts');
+        if (!data) {
+            alert("Aucun produit à exporter !");
+            return;
+        }
+        // Affiche le code dans une zone de texte pour pouvoir le copier facilement
+        const codeCopie = prompt("Copie ce code pour l'importer sur ton PC :", data);
+    }
+</script>
+            <!-- Bouton Exporter -->
+<div style="margin-bottom: 15px; text-align: right;">
+    <button onclick="exporterProduits()" style="background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer;">
+        <i class="fa-solid fa-file-export"></i> Exporter mes produits
+    </button>
+</div>
             <h2>Mes articles en vente actuelle</h2>
             <div class="table-wrapper">
                 <table>
@@ -215,6 +238,17 @@
                 afficherMesArticles();
             }
         };
+        <script>
+    function exporterProduits() {
+        const data = localStorage.getItem('globalProducts');
+        if (!data) {
+            alert("Aucun produit à exporter !");
+            return;
+        }
+        // Utilisation de prompt pour copier facilement
+        prompt("Copie ce code pour l'importer sur ton PC :", data);
+    }
+</script>
     </script>
 </body>
 </html>
