@@ -491,11 +491,16 @@
             afficherLePanier();
         };
 
-        // 8. Finalisation de l'achat
-        window.validerLaCommande = function() {
-            if (panier.length === 0) {
-                alert("Votre panier est vide ! Ajoutez des articles avant de commander.");
-                return;
+       // 8. Connexion directe de ton panier avec ton fichier commande.html existant
+window.validerLaCommande = function() {
+    if (panier.length === 0) {
+        alert("Votre panier est vide ! Ajoutez des articles avant de commander.");
+        return;
+    }
+    
+    // On redirige le client directement vers ton fichier de commande actuel
+    window.location.href = "commande.html";
+};
             }
             alert("🎉 Succès ! Votre commande sur KARNASH MARKETPLACE DE LA MODE a été enregistrée avec succès et envoyée aux créateurs concernés.");
             
