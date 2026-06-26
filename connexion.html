@@ -3,273 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vogue Marketplace | Connexion</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Connexion | Vogue Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        /* Même design system et variables pour garantir une harmonie visuelle */
         :root {
-            --primary-color: #1a0933;   
-            --accent-purple: #6a2b83;  
-            --accent-gold: #cca43b;    
-            --bg-light: #f9f8fa;       
-            --text-dark: #2d2438;      
-            --text-muted: #796e85;     
-            --white: #ffffff;
-            --shadow: 0 10px 25px rgba(26, 9, 51, 0.1);
-            --transition: all 0.3s ease;
+            --primary-bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --accent-purple: #6c5ce7;
+            --text-color: #2d3436;
+            --input-border: #dfe6e9;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            margin: 0;
         }
-
         .auth-container {
-            background-color: var(--white);
-            width: 100%;
-            max-width: 450px;
+            background-color: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(106, 43, 131, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
         }
-
         .auth-header {
             text-align: center;
             margin-bottom: 30px;
         }
-
-        .auth-header img {
-            height: 50px;
-            margin-bottom: 15px;
-        }
-
         .auth-header h2 {
+            margin: 0 0 10px 0;
             font-size: 26px;
-            font-weight: 700;
-            color: var(--primary-color);
         }
-
         .auth-header p {
-            color: var(--text-muted);
+            color: #7f8c8d;
+            margin: 0;
             font-size: 14px;
         }
-
         .form-group {
             margin-bottom: 20px;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 8px;
+            font-weight: 600;
             font-size: 14px;
-            font-weight: 500;
-            color: var(--primary-color);
         }
-
         .input-icon-wrap {
             position: relative;
         }
-
         .input-icon-wrap i {
             position: absolute;
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 16px;
+            color: #b2bec3;
         }
-
         .form-control {
             width: 100%;
-            padding: 12px 15px 12px 45px;
-            border: 1px solid #e2daf0;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid var(--input-border);
             border-radius: 8px;
             font-size: 14px;
-            background-color: #faf9fc;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
+            box-sizing: border-box;
             outline: none;
-            border-color: var(--accent-purple);
-            background-color: var(--white);
-            box-shadow: 0 0 0 3px rgba(106, 43, 131, 0.1);
+            transition: border-color 0.3s;
         }
-
-        .forgot-password {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: -10px;
+        .form-control:focus {
+            border-color: var(--accent-purple);
+        }
+        .forgot-link-container {
+            text-align: right;
             margin-bottom: 20px;
         }
-
-        .forgot-password a {
-            font-size: 13px;
+        .forgot-link-container a {
             color: var(--accent-purple);
-            font-weight: 500;
+            text-decoration: none;
+            font-size: 13px;
         }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-
         .btn-auth {
             width: 100%;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            padding: 14px;
+            padding: 12px;
+            background-color: var(--accent-purple);
+            color: white;
             border: none;
             border-radius: 8px;
-            font-weight: 600;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.2);
+            transition: background-color 0.3s;
         }
-
         .btn-auth:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(106, 43, 131, 0.3);
+            background-color: #5b4cc4;
         }
-
         .auth-footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 14px;
-            color: var(--text-muted);
         }
-
         .auth-footer a {
             color: var(--accent-purple);
-            font-weight: 600;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-container">
-        <div class="auth-header">
-            <img src="logo.png" alt="Vogue Logo" onerror="this.style.display='none';">
-            <h2>Bon retour !</h2>
-            <p>Connectez-vous à votre espace Vogue</p>
-        </div>
-
-        <form action="index.html">
-            <div class="form-group">
-                <label for="email">Adresse Email</label>
-                <div class="input-icon-wrap">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <div class="input-icon-wrap">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-                </div>
-            </div>
-
-            <div class="forgot-password">
-               <a href="#" id="forgot-password">Mot de passe oublié ?</a>                   
-            </div>
-
-            <button type="submit" class="btn-auth">Se connecter</button>
-        </form>
-
-        <div class="auth-footer">
-            <p>Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a></p>
-        </div>
+<div class="auth-container">
+    <div class="auth-header">
+        <h2>Bon retour !</h2>
+        <p>Connectez-vous à votre espace Vogue</p>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.querySelector('form');
-        
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Empêche la page de se recharger
-                
-                // Récupère les éléments tapés dans le formulaire
-        const emailSaisi = document.querySelector('input[type="email"]').value;
-        const passwordSaisi = document.querySelector('input[type="password"]').value;
-        
-        // --- COMPTE VENDEUR PAR DÉFAUT ---
-        const vendeurEmail = "roiteletnzau611@gmail.com";
-        const vendeurPassword = "1234"; // Change par ton vrai mot de passe vendeur
-        
-        // --- COMPTE CLIENT PAR DÉFAUT ---
-        const clientEmail = "client@vogue.com"; // Exemple de compte client
-        const clientPassword = "1234"; // Change par ton vrai mot de passe client
 
-        // Vérification instantanée (sans alert)
-        if (emailSaisi === vendeurEmail && passwordSaisi === vendeurPassword) {
-            // Connexion directe du Vendeur vers le tableau de bord
-            window.location.href = 'dashboard.html'; 
-        } 
-        else if (emailSaisi === clientEmail && passwordSaisi === clientPassword) {
-            // Connexion directe du Client vers la page d'accueil ou catalogue
-            window.location.href = 'index.html'; 
-        } 
-        else {
-            // On garde une alerte uniquement si les identifiants sont faux
-            alert("Mot de passe ou email incorrect.");
-        }
-                // Récupère l'admin stocké en mémoire
-                const adminEmailStocke = localStorage.getItem('adminEmail') || "admin@karnash.com"; // Compte par défaut
-                const adminPasswordStocke = localStorage.getItem('adminPassword') || "1234"; // Mot de passe par défaut
-                
-                // Vérification des identifiants
-                if (emailSaisi === adminEmailStocke && passwordSaisi === adminPasswordStocke) {
-                    alert("Connexion réussie ! Bienvenue Admin.");
-                    window.location.href = 'dashboard.html'; // Redirection vers le tableau de bord
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Adresse Email</label>
+            <div class="input-icon-wrap">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-icon-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+        </div>
+
+        <div class="forgot-link-container">
+            <a href="#" id="forgot-password">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="btn-auth">Se connecter</button>
+    </form>
+
+    <div class="auth-footer">
+        Nouveau sur Vogue ? <a href="inscription.html">Créez un compte</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Récupération des données saisies
+            const emailSaisi = document.getElementById('email').value.trim().toLowerCase();
+            const passwordSaisi = document.getElementById('password').value;
+
+            // Comptes créés "Par Défaut" (au cas où on n'utilise pas l'inscription)
+            const vendeurEmailDefaut = "roiteletnzau611@gmail.com";
+            const vendeurPasswordDefaut = "1234";
+
+            const clientEmailDefaut = "client@vogue.com";
+            const clientPasswordDefaut = "1234";
+
+            // Récupération du compte éventuellement inscrit via inscription.html
+            const emailInscrit = localStorage.getItem('userEmail');
+            const passwordInscrit = localStorage.getItem('userPassword');
+            const roleInscrit = localStorage.getItem('userRole');
+
+            // --- VÉRIFICATION & CONNEXION DIRECTE ---
+            
+            // 1. Test du compte inscrit dynamiquement
+            if (emailSaisi === emailInscrit && passwordSaisi === passwordInscrit) {
+                if (roleInscrit === 'vendeur') {
+                    window.location.href = 'dashboard.html';
                 } else {
-                    alert("Identifiants incorrects. Veuillez réessayer.");
+                    window.location.href = 'index.html';
                 }
-            });
-        }
-    });
-        // --- SCRIPT DE RÉCUPÉRATION DU MOT DE PASSE VENDEUR ---
-const linkForgot = document.getElementById('forgot-password');
-if (linkForgot) {
-    linkForgot.addEventListener('click', function(e) {
-        e.preventDefault(); // Empêche la page de se recharger
-        
-        const emailSaisi = prompt("Veuillez entrer votre adresse e-mail vendeur :");
-        
-        if (emailSaisi) {
-            // Récupère l'adresse et le mot de passe enregistrés (ou ceux par défaut)
-            const vendeurEmailStocke = localStorage.getItem('vendeurEmail') || "roiteletnzau611@gmail.com";
-            const vendeurPasswordStocke = localStorage.getItem('vendeurPassword') || "MetsTonMotDePasseIci"; 
-
-            if (emailSaisi === vendeurEmailStocke) {
-                alert("🔑 Récupération de compte :\n\nVotre mot de passe actuel est : " + vendeurPasswordStocke);
-            } else {
-                alert("❌ Aucune boutique ou compte vendeur n'est enregistré avec cette adresse e-mail.");
             }
-        }
-    });
-}
+            // 2. Test du compte Vendeur par défaut
+            else if (emailSaisi === vendeurEmailDefaut && passwordSaisi === vendeurPasswordDefaut) {
+                window.location.href = 'dashboard.html';
+            }
+            // 3. Test du compte Client par défaut
+            else if (emailSaisi === clientEmailDefaut && passwordSaisi === clientPasswordDefaut) {
+                window.location.href = 'index.html';
+            }
+            // 4. Erreur si rien ne correspond
+            else {
+                alert("Identifiants incorrects. Veuillez réessayer.");
+            }
+        });
+    }
+
+    // --- LOGIQUE INTERACTIVE DU MOT DE PASSE OUBLIÉ ---
+    const linkForgot = document.getElementById('forgot-password');
+    if (linkForgot) {
+        linkForgot.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const emailSaisi = prompt("Veuillez entrer votre adresse e-mail pour récupérer votre mot de passe :");
+            
+            if (emailSaisi) {
+                const emailNettoye = emailSaisi.trim().toLowerCase();
+                
+                const vendeurEmailDefaut = "roiteletnzau611@gmail.com";
+                const vendeurPasswordDefaut = "1234";
+                
+                const clientEmailDefaut = "client@vogue.com";
+                const clientPasswordDefaut = "1234";
+
+                const emailInscrit = localStorage.getItem('userEmail');
+                const passwordInscrit = localStorage.getItem('userPassword');
+
+                if (emailNettoye === emailInscrit) {
+                    alert("🔑 Mot de passe retrouvé :\n\nVotre mot de passe est : " + passwordInscrit);
+                } else if (emailNettoye === vendeurEmailDefaut) {
+                    alert("🔑 Compte Vendeur par défaut :\n\nVotre mot de passe est : " + vendeurPasswordDefaut);
+                } else if (emailNettoye === clientEmailDefaut) {
+                    alert("🔑 Compte Client par défaut :\n\nVotre mot de passe est : " + clientPasswordDefaut);
+                } else {
+                    alert("❌ Aucun compte n'est enregistré avec cette adresse e-mail.");
+                }
+            }
+        });
+    }
+});
 </script>
 
 </body>
