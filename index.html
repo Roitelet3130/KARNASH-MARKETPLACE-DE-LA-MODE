@@ -3,367 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karnash Marketplace de la mode | Accueil</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Vogue Marketplace | Accueil Catalogue</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
-            --primary-color: #1a0933;   /* Violet très sombre chic */
-            --accent-purple: #6a2b83;  /* Violet vibrant du logo */
-            --accent-gold: #cca43b;    /* Or élégant du logo */
-            --bg-light: #f9f8fa;       /* Fond clair légèrement teinté */
-            --text-dark: #2d2438;      /* Texte principal sombre */
-            --text-muted: #796e85;     /* Texte secondaire */
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(26, 9, 51, 0.08);
-            --transition: all 0.3s ease;
+            --primary-bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --accent-purple: #6c5ce7;
+            --text-color: #2d3436;
+            --border-color: #dfe6e9;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary-bg);
+            margin: 0; padding: 0; color: var(--text-color);
         }
-
-        a {
-            text-decoration: none;
-            color: inherit;
+        header {
+            background: var(--card-bg);
+            padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
         }
-
-        /* --- NAVBAR WITH SMALL LOGO --- */
-        .navbar {
-            background-color: var(--white);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 8%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
+        .logo { font-size: 24px; font-weight: bold; color: var(--accent-purple); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .cart-icon { position: relative; font-size: 20px; color: var(--text-color); text-decoration: none; }
+        .cart-count {
+            position: absolute; top: -8px; right: -10px;
+            background: #e74c3c; color: white; font-size: 11px;
+            padding: 2px 6px; border-radius: 50%; font-weight: bold;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .main-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .welcome-text { margin-bottom: 30px; }
+        
+        /* Grid des produits */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;
         }
-
-        .logo-img {
-            height: 32px; /* Logo calibré plus petit */
-            object-fit: contain;
+        .product-card {
+            background: var(--card-bg); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s;
+            position: relative; display: flex; flex-direction: column;
         }
-
-        .logo-text {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--primary-color);
-            text-transform: uppercase;
+        .product-card:hover { transform: translateY(-50px); }
+        .product-card img { width: 100%; height: 220px; object-fit: cover; }
+        .product-info { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+        .shop-tag {
+            background: #eef2f3; color: #7f8c8d; font-size: 11px; font-weight: bold;
+            padding: 4px 8px; border-radius: 4px; align-self: flex-start; margin-bottom: 8px;
         }
-
-        .logo-text span {
-            color: var(--accent-gold);
+        .product-title { font-size: 16px; margin: 0 0 8px 0; font-weight: 600; }
+        .product-desc { font-size: 13px; color: #7f8c8d; margin: 0 0 15px 0; flex: 1; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .price { font-size: 18px; font-weight: bold; color: var(--accent-purple); }
+        .btn-buy {
+            background: var(--accent-purple); color: white; border: none;
+            padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--text-dark);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-purple);
-        }
-
-        .nav-icons {
-            display: flex;
-            gap: 20px;
-            font-size: 20px;
-            align-items: center;
-            color: var(--primary-color);
-        }
-
-        .nav-icons a {
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .nav-icons a:hover {
-            color: var(--accent-purple);
-        }
-
-        .badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background-color: var(--accent-purple);
-            color: var(--white);
-            font-size: 11px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 65vh;
-            background: linear-gradient(rgba(26, 9, 51, 0.6), rgba(26, 9, 51, 0.85)), url('https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1920') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 46px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero h1 span {
-            color: var(--accent-gold);
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 600px;
-            color: #e2daf0;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(106, 43, 131, 0.4);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(106, 43, 131, 0.6);
-            border-color: var(--accent-gold);
-        }
-
-        /* --- SECTION COMPOSANTS --- */
-        .section {
-            padding: 60px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 40px;
-            position: relative;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent-gold);
-            margin: 10px auto 0;
-        }
-
-        /* --- GRID BOUTIQUES --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background-color: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(106, 43, 131, 0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-        }
-
-        .card-img {
-            height: 240px;
-            background-color: #eaeaea;
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 18px;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .card-meta {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 20px;
-            height: 40px;
-            overflow: hidden;
-        }
-
-        /* Button style inside card */
-        .card-body .btn-sm {
-            padding: 8px 20px;
-            font-size: 13px;
-            border-radius: 50px;
-            background: linear-gradient(135deg, var(--accent-purple), #4a1c5c);
-            color: var(--white);
-            display: inline-block;
-            font-weight: 600;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 30px 8%;
-            text-align: center;
-            font-size: 14px;
-            margin-top: 40px;
-            border-top: 3px solid var(--accent-gold);
-        }
+        .btn-buy:hover { background: #5b4cc4; }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="logo.png.jpeg" alt="Karnash Logo" class="logo-img">
-            <a href="index.html" class="logo-text">KARNASH<span>.Marketplace de la mode</span></a>
+<header>
+    <a href="#" class="logo"><i class="fa-solid fa-bag-shopping"></i> VOGUE</a>
+    <div class="nav-right">
+        <span id="clientWelcome" style="font-weight: 600;">Bonjour, Invité</span>
+        <a href="#" class="cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="connexion.html" style="color: #7f8c8d; text-decoration: none; font-size: 14px;"><i class="fa-solid fa-sign-out-alt"></i></a>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="welcome-text">
+        <h1 style="margin: 0 0 5px 0;">Découvrez toutes les Boutiques</h1>
+        <p style="margin: 0; color: #7f8c8d;">Faites vos achats en direct auprès de nos créateurs locaux de Kinshasa.</p>
+    </div>
+
+    <div class="products-grid" id="globalCatalogue">
         </div>
-        
-        <nav class="nav-links">
-            <a href="index.html" class="active">Accueil</a>
-            <a href="catalogue.html">Catalogue</a>
-            <a href="boutiques.html">Boutiques</a>
-        </nav>
-
-        <div class="nav-icons">
-            <a href="connexion.html" title="Mon Compte"><i class="fa-regular fa-user"></i></a>
-            <a href="client/favoris.html" title="Favoris"><i class="fa-regular fa-heart"></i></a>
-            <a href="panier.html" title="Mon Panier">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="badge" id="cart-count">0</span>
-            </a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <h1>Fashion. Connect. <span>Discover.</span></h1>
-        <p>Découvrez l'univers haut de gamme des meilleures boutiques de créateurs. Le style à portée de main.</p>
-        <a href="boutiques.html" class="btn"><i class="fa-solid fa-store"></i> Visiter les boutiques</a>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Boutiques à la Une</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600" alt="Fashion Kin">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Fashion Kin</h3>
-                    <p class="card-meta">Streetwear, Urban & Tendances branchées.</p>
-                    <a href="boutique.html" class="btn-sm">Découvrir</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600" alt="Style Africa">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Style Africa</h3>
-                    <p class="card-meta">Mélange moderne de tissus africains et coupes occidentales.</p>
-                    <a href="boutique.html" class="btn-sm">Découvrir</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=600" alt="Congo Chic">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Congo Chic</h3>
-                    <p class="card-meta">Haute couture & Designs en Wax de qualité supérieure.</p>
-                    <a href="boutique.html" class="btn-sm">Découvrir</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600" alt="Karnash Drul Fashion">
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Karnash Drul Fashion</h3>
-                    <p class="card-meta">Chaussures haut de gamme, maroquinerie & accessoires de luxe.</p>
-                    <a href="boutique.html" class="btn-sm">Découvrir</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 KARNASH MARKETPLACE DE LA MODE - Tous droits réservés.</p>
-    </footer>
-
-
-</footer>
+</div>
 
 <script>
-    function rafraichirCompteurPanier() {
-        let nbArticles = localStorage.getItem('compteurPanier') || 0;
-        const badge = document.getElementById('cart-count') || document.querySelector('.badge');
-        if (badge) {
-            badge.innerText = nbArticles;
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Afficher le nom du client connecté
+    const activeUserName = localStorage.getItem('userName') || "Client";
+    document.getElementById('clientWelcome').innerText = "Bonjour, " + activeUserName;
+
+    // 2. Charger et afficher TOUTES les publications de TOUTES les boutiques
+    renderCatalogue();
+
+    // 3. Gestion simple du compteur de panier
+    let currentCartCount = 0;
+
+    window.ajouterAuPanier = function(productName, shopName) {
+        currentCartCount++;
+        document.getElementById('cartCount').innerText = currentCartCount;
+        alert(`🛒 "${productName}" (de la boutique ${shopName}) a été ajouté à votre panier !`);
+    };
+
+    function renderCatalogue() {
+        const allProducts = JSON.parse(localStorage.getItem('globalProducts')) || [];
+        const container = document.getElementById('globalCatalogue');
+        container.innerHTML = '';
+
+        if (allProducts.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
+                    <i class="fa-solid fa-store-slash" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <p>Aucun article n'est en vente pour le moment. Les boutiques préparent leurs collections !</p>
+                </div>
+            `;
+            return;
         }
+
+        // On boucle sur TOUS les produits sans distinction de boutique
+        allProducts.forEach(product => {
+            container.innerHTML += `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <span class="shop-tag"><i class="fa-solid fa-shop"></i> ${product.shopName}</span>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-desc">${product.desc || 'Aucune description disponible.'}</p>
+                        <div class="price-row">
+                            <span class="price">${product.price} $</span>
+                            <button class="btn-buy" onclick="ajouterAuPanier('${product.name.replace(/'/g, "\\'")}', '${product.shopName.replace(/'/g, "\\'")}')">
+                                <i class="fa-solid fa-cart-plus"></i> Acheter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
     }
-    document.addEventListener('DOMContentLoaded', rafraichirCompteurPanier);
+});
 </script>
 
 </body>
