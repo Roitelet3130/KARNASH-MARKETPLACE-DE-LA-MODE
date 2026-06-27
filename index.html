@@ -12,31 +12,8 @@
     </style>
 </head>
 <body>
-
     <h1 style="text-align:center; padding: 20px;">Nos Boutiques Partenaires</h1>
-    
-    <div class="grid" id="storesGrid">
-        <div class="store-card">
-            <div class="store-banner"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600"></div>
-            <h3>Fashion Kin</h3>
-            <a href="boutique-client.html?id=fashion-kin" class="btn">Visiter</a>
-        </div>
-        <div class="store-card">
-            <div class="store-banner"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600"></div>
-            <h3>Style Africa</h3>
-            <a href="boutique-client.html?id=style-africa" class="btn">Visiter</a>
-        </div>
-        <div class="store-card">
-            <div class="store-banner"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600"></div>
-            <h3>Congo Chic</h3>
-            <a href="boutique-client.html?id=congo-chic" class="btn">Visiter</a>
-        </div>
-        <div class="store-card">
-            <div class="store-banner"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600"></div>
-            <h3>Karnash Drul</h3>
-            <a href="boutique-client.html?id=karnash-drul" class="btn">Visiter</a>
-        </div>
-    </div>
+    <div class="grid" id="storesGrid"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
@@ -51,7 +28,27 @@
             appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
         };
         initializeApp(firebaseConfig);
-        console.log("Catalogue prêt !");
+        const db = getDatabase();
+
+       // Remplace 'boutiques/' ou 'articles/' par ceci :
+onValue(ref(db, 'globalProducts/'), (snapshot) => {
+    // Ton code continue ici...
+});
+            const grid = document.getElementById('storesGrid');
+            grid.innerHTML = "";
+            const data = snapshot.val();
+            if (data) {
+                Object.keys(data).forEach(id => {
+                    const b = data[id];
+                    grid.innerHTML += `
+                        <div class="store-card">
+                            <div class="store-banner"><img src="${b.banner || 'https://via.placeholder.com/300'}"></div>
+                            <h3>${b.name}</h3>
+                            <a href="boutique-client.html?id=${id}" class="btn">Visiter</a>
+                        </div>`;
+                });
+            }
+        });
     </script>
 </body>
 </html>
