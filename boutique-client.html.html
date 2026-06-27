@@ -14,36 +14,34 @@
     <div class="grid-produits" id="vitrine-container"></div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-        const firebaseConfig = { /* MÊME CONFIG QUE PLUS HAUT */ };
-        initializeApp(firebaseConfig);
-        const db = getDatabase();
+    // ... (Ton code firebaseConfig ici) ...
 
-        const params = new URLSearchParams(window.location.search);
-        const idBoutique = params.get('id');
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-        onValue(ref(db, 'articles/'), (snapshot) => {
-            const container = document.getElementById('vitrine-container');
-            container.innerHTML = "";
-            const articles = snapshot.val();
-            
-            if (articles) {
-                Object.values(articles).forEach(art => {
-                    // Si l'article appartient à la boutique, on l'affiche
-                    if (art.boutiqueID === idBoutique) {
-                        container.innerHTML += `
-                            <div class="card">
-                                <img src="${art.image}" style="width:100%; height:150px; object-fit:cover;">
-                                <h3>${art.nom}</h3>
-                                <p>${art.prix} $</p>
-                                <button class="btn-panier" onclick="alert('Ajouté au panier !')">Ajouter</button>
-                            </div>`;
-                    }
-                });
+    // 1. Récupérer l'ID dans l'URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    if (productId) {
+        // 2. Chercher ce produit précis dans Firebase
+        const dbRef = ref(db);
+        get(child(dbRef, `globalProducts/${productId}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                const item = snapshot.val();
+                
+                // 3. Afficher les infos dans ta page (remplace les IDs par les tiens)
+                document.getElementById('nomProduit').innerText = item.nom;
+                document.getElementById('prixProduit').innerText = item.prix + " $";
+                document.getElementById('imageProduit').src = item.image;
+            } else {
+                console.log("Produit introuvable");
             }
         });
-    </script>
+    }
+</script>
 </body>
 </html>
