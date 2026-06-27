@@ -2,153 +2,52 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement Sécurisé | Vogue</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Mon Panier | Karnash</title>
     <style>
-        :root {
-            --primary-bg: #f4f5f7;
-            --card-bg: #ffffff;
-            --accent-purple: #6c5ce7;
-            --text-color: #2d3436;
-            --success-color: #2ecc71;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-        }
-        .pay-card {
-            background: var(--card-bg);
-            max-width: 450px;
-            width: 100%;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-            box-sizing: border-box;
-        }
-        .price-tag {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--accent-purple);
-            margin: 15px 0;
-        }
-        .method-icon {
-            font-size: 45px;
-            margin-bottom: 10px;
-            color: #f1c40f;
-        }
-        .form-group {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .form-control {
-            width: 100%; padding: 12px; border: 1px solid #dfe6e9;
-            border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none;
-        }
-        .btn-pay {
-            width: 100%; padding: 14px; background: var(--success-color); color: white;
-            border: none; border-radius: 8px; font-size: 16px; font-weight: bold;
-            cursor: pointer; transition: 0.2s;
-        }
-        .btn-pay:hover { background: #27ae60; }
-        .cancel-link {
-            display: inline-block; margin-top: 15px; color: #7f8c8d; text-decoration: none; font-size: 14px;
-        }
+        body { font-family: 'Poppins', sans-serif; padding: 20px; background: #f9f8fa; }
+        .panier-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-whatsapp { width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="pay-card">
-        <div id="methodLogo" class="method-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-        <h2 style="margin: 5px 0;">Finaliser le Paiement</h2>
-        <p style="color: #7f8c8d; margin: 5px 0 15px 0;" id="clientGreeting">Cher client, merci pour votre confiance.</p>
+<div class="panier-container">
+    <h1>Ton Panier</h1>
+    <div id="liste-panier"></div>
+    <button onclick="envoyerCommandeWhatsApp()" class="btn-whatsapp">
+        Finaliser la commande sur WhatsApp
+    </button>
+</div>
+
+<script>
+    // 1. Afficher les articles au chargement
+    function afficherPanier() {
+        let panier = JSON.parse(localStorage.getItem('panier')) || [];
+        let liste = document.getElementById('liste-panier');
         
-        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
-            <span style="font-size: 13px; color: #7f8c8d; display: block;">Montant Total à Payer :</span>
-            <div class="price-tag" id="amountToPay">0 $</div>
-        </div>
+        if (panier.length === 0) {
+            liste.innerHTML = "<p>Ton panier est vide.</p>";
+        } else {
+            liste.innerHTML = panier.map(item => `<p>• ${item.nom} - ${item.prix} $</p>`).join('');
+        }
+    }
 
-        <form id="paymentExecutionForm">
-            <div class="form-group" id="phoneFieldGroup">
-                <label id="phoneLabel">Numéro de compte Mobile Money</label>
-                <input type="tel" id="payPhoneNumber" class="form-control" placeholder="Ex: 082XXXXXXX">
-                <small style="color: #95a5a6; margin-top: 5px; display: block;">Un message de validation (PIN) sera envoyé sur ce téléphone.</small>
-            </div>
-
-            <div class="form-group" id="cashFieldGroup" style="display: none; text-align: center; color: #7f8c8d;">
-                <p><i class="fa-solid fa-hand-holding-dollar" style="font-size: 30px; color: #2ecc71;"></i></p>
-                <p>Vous paierez la somme exacte en mains propres lors de la réception de vos articles à votre adresse.</p>
-            </div>
-
-            <button type="submit" class="btn-pay" id="submitPayBtn">Confirmer et Payer</button>
-        </form>
-
-        <a href="commande.html" class="cancel-link"><i class="fa-solid fa-chevron-left"></i> Modifier mes infos</a>
-    </div>
-
-    <script>
-        const infoAchat = JSON.parse(localStorage.getItem('dernier_achat')) || { total: 0, methode: 'Cash', client: 'Acheteur' };
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('amountToPay').innerText = infoAchat.total + " $";
-            document.getElementById('clientGreeting').innerText = `Merci pour votre commande, ${infoAchat.client}.`;
-            
-            const logoContainer = document.getElementById('methodLogo');
-            const phoneGroup = document.getElementById('phoneFieldGroup');
-            const cashGroup = document.getElementById('cashFieldGroup');
-            const phoneInput = document.getElementById('payPhoneNumber');
-            const btn = document.getElementById('submitPayBtn');
-
-            // Personnalisation visuelle selon l'opérateur choisi à Kinshasa
-            if (infoAchat.methode === 'Mpesa') {
-                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #e74c3c;"></i> <span style="font-size:16px; font-weight:bold; color:#e74c3c; display:block;">M-PESA VODACOM</span>`;
-                phoneInput.required = true;
-            } else if (infoAchat.methode === 'AirtelMoney') {
-                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #ff4757;"></i> <span style="font-size:16px; font-weight:bold; color:#ff4757; display:block;">AIRTEL MONEY</span>`;
-                phoneInput.required = true;
-            } else if (infoAchat.methode === 'OrangeMoney') {
-                logoContainer.innerHTML = `<i class="fa-solid fa-tablet-screen-button" style="color: #ffa500;"></i> <span style="font-size:16px; font-weight:bold; color:#ffa500; display:block;">ORANGE MONEY</span>`;
-                phoneInput.required = true;
-            } else {
-                // Si c'est en Cash
-                logoContainer.innerHTML = `<i class="fa-solid fa-money-bill-wave" style="color: #2ecc71;"></i> <span style="font-size:16px; font-weight:bold; color:#2ecc71; display:block;">Paiement Cash</span>`;
-                phoneGroup.style.display = 'none';
-                cashGroup.style.display = 'block';
-                btn.innerText = "Finaliser la commande";
-            }
+    // 2. Envoyer sur WhatsApp
+    function envoyerCommandeWhatsApp() {
+        let panier = JSON.parse(localStorage.getItem('panier')) || [];
+        if (panier.length === 0) { alert("Le panier est vide !"); return; }
+        
+        let message = "Bonjour, je souhaite commander : ";
+        panier.forEach(item => {
+            message += "%0A- " + item.nom + " (" + item.prix + "$)";
         });
+        
+        let telephone = "243XXXXXXXXXX"; // Remplace par ton vrai numéro !
+        window.open(`https://wa.me/${telephone}?text=${message}`, '_blank');
+    }
 
-        document.getElementById('paymentExecutionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    afficherPanier();
+</script>
 
-            if (infoAchat.methode === 'Cash') {
-                alert(`🛒 Commande Enregistrée !\n\nVotre commande de ${infoAchat.total} $ est validée. Préparez le montant en cash pour la livraison à : ${infoAchat.adresse}.`);
-            } else {
-                const phone = document.getElementById('payPhoneNumber').value;
-                alert(`📱 Requête envoyée avec succès !\n\nUn message pop-up de validation a été envoyé au numéro ${phone}.\nEntrez votre code secret PIN pour confirmer le paiement de ${infoAchat.total} $.`);
-            }
-
-            // Nettoyage final du panier global après l'achat réussi
-            localStorage.removeItem('panier_vogue');
-            localStorage.removeItem('dernier_achat');
-            
-            // Retour triomphal sur la page d'accueil
-            window.location.href = "index.html";
-        });
-    </script>
 </body>
 </html>
