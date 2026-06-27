@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Vitrine Boutique | Karnash</title>
+    <title>Vitrine Boutique</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #f9f8fa; padding: 20px; }
-        .grid-produits { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .grid-produits { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
         .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .btn-panier { background: #6a2b83; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; }
+        .btn-panier { background: #6a2b83; color: white; border: none; padding: 10px; border-radius: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -19,21 +18,16 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
-            authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
-            projectId: "karnash-marketplace-de-la-mode",
-            storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
-            messagingSenderId: "94247832680",
-            appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
-        };
+        // CONFIGURATION (Remplace par tes infos)
+        const firebaseConfig = { /* ... tes infos firebase ... */ };
         initializeApp(firebaseConfig);
         const db = getDatabase();
 
-        // Récupère l'ID boutique dans l'adresse (URL)
+        // Récupérer l'ID de la boutique dans l'URL (ex: boutique-client.html?id=fashion-kin)
         const urlParams = new URLSearchParams(window.location.search);
         const boutiqueId = urlParams.get('id');
 
+        // Récupérer les articles
         onValue(ref(db, 'articles/'), (snapshot) => {
             const articles = snapshot.val();
             const container = document.getElementById('vitrine-container');
@@ -41,7 +35,7 @@
 
             if (articles) {
                 Object.values(articles).forEach(art => {
-                    // Si l'article appartient à la boutique cliquée, on l'affiche
+                    // Si l'article appartient à cette boutique, on l'affiche
                     if (art.boutiqueID === boutiqueId) {
                         container.innerHTML += `
                             <div class="card">
