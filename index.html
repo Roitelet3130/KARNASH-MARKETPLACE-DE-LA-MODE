@@ -15,39 +15,38 @@
     <h1 style="text-align:center; padding: 20px;">Nos Boutiques Partenaires</h1>
     <div class="grid" id="storesGrid"></div>
 
-    <script import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
-    authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
-    projectId: "karnash-marketplace-de-la-mode",
-    storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
-    messagingSenderId: "94247832680",
-    appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// On teste la connexion directe à globalProducts
-const productsRef = ref(db, 'globalProducts/');
-onValue(productsRef, (snapshot) => {
-    const data = snapshot.val();
-    console.log("Données reçues de Firebase :", data);
+    const firebaseConfig = {
+        // ... garde ton code config ici ...
+    };
     
-    if (data) {
-        alert("Connexion réussie ! Il y a " + Object.keys(data).length + " produits.");
-    } else {
-        alert("Connexion réussie, mais le dossier globalProducts est vide.");
-    }
-}, (error) => {
-    console.error("Erreur de connexion :", error);
-    alert("Erreur : " + error.message);
-});
-                });
-            }
-        });
-    </script>
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const productsRef = ref(db, 'globalProducts/');
+    onValue(productsRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Données reçues de Firebase :", data);
+        
+        if (data) {
+            const grid = document.getElementById('storesGrid');
+            grid.innerHTML = ""; // Vide le contenu actuel
+            
+            Object.keys(data).forEach(id => {
+                const item = data[id];
+                // Ajout automatique dans la grille
+                grid.innerHTML += `
+                    <div class="store-card">
+                        <img src="${item.image || 'https://via.placeholder.com/150'}" style="width:100%">
+                        <h3>${item.nom || "Article"}</h3>
+                        <p>${item.prix || "0"} $</p>
+                    </div>`;
+            });
+        }
+    });
+</script>
 </body>
 </html>
