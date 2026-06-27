@@ -6,56 +6,44 @@
     <style>
         .grid-produits { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
         .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .btn-panier { background: #6a2b83; color: white; border: none; padding: 10px; border-radius: 20px; cursor: pointer; }
+        .btn-panier { background: #25d366; color: white; border: none; padding: 10px; border-radius: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
-
-    <h1>Articles de la boutique</h1>
+    <h1 id="titre-boutique">Articles de la boutique</h1>
     <div class="grid-produits" id="vitrine-container"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-        // CONFIGURATION (Remplace par tes infos)
-        const firebaseConfig = { /* ... tes infos firebase ... */ };
+        const firebaseConfig = { /* MÊME CONFIG QUE PLUS HAUT */ };
         initializeApp(firebaseConfig);
         const db = getDatabase();
 
-        // Récupérer l'ID de la boutique dans l'URL (ex: boutique-client.html?id=fashion-kin)
-        const urlParams = new URLSearchParams(window.location.search);
-        const boutiqueId = urlParams.get('id');
+        const params = new URLSearchParams(window.location.search);
+        const idBoutique = params.get('id');
 
-        // Récupérer les articles
         onValue(ref(db, 'articles/'), (snapshot) => {
-            const articles = snapshot.val();
             const container = document.getElementById('vitrine-container');
             container.innerHTML = "";
-
+            const articles = snapshot.val();
+            
             if (articles) {
                 Object.values(articles).forEach(art => {
-                    // Si l'article appartient à cette boutique, on l'affiche
-                    if (art.boutiqueID === boutiqueId) {
+                    // Si l'article appartient à la boutique, on l'affiche
+                    if (art.boutiqueID === idBoutique) {
                         container.innerHTML += `
                             <div class="card">
                                 <img src="${art.image}" style="width:100%; height:150px; object-fit:cover;">
                                 <h3>${art.nom}</h3>
                                 <p>${art.prix} $</p>
-                                <button class="btn-panier" onclick="ajouterAuPanier('${art.nom}', ${art.prix})">Ajouter au panier</button>
-                            </div>
-                        `;
+                                <button class="btn-panier" onclick="alert('Ajouté au panier !')">Ajouter</button>
+                            </div>`;
                     }
                 });
             }
         });
-
-        window.ajouterAuPanier = function(nom, prix) {
-            let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            panier.push({ nom: nom, prix: prix });
-            localStorage.setItem('panier', JSON.stringify(panier));
-            alert(nom + " ajouté au panier !");
-        };
     </script>
 </body>
 </html>
