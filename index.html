@@ -64,6 +64,45 @@
         };
         initializeApp(firebaseConfig);
         console.log("Firebase est bien connecté !");
-    </script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
+        authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
+        projectId: "karnash-marketplace-de-la-mode",
+        storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
+        messagingSenderId: "94247832680",
+        appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Écoute les données
+    onValue(ref(db, 'boutiques/'), (snapshot) => {
+        const grid = document.getElementById('storesGrid');
+        const boutiques = snapshot.val();
+        
+        // Si on a des données dans Firebase, on affiche celles de Firebase
+        if (boutiques) {
+            grid.innerHTML = ""; // Vider pour afficher les données du cloud
+            Object.values(boutiques).forEach(store => {
+                grid.innerHTML += `
+                    <div class="store-card">
+                        <div class="store-banner">
+                            <img src="${store.banner}" alt="Bannière">
+                            <div class="store-avatar">${store.shortName}</div>
+                        </div>
+                        <div class="store-body">
+                            <h3 class="store-name">${store.name}</h3>
+                            <a href="boutique.html" class="btn">Visiter</a>
+                        </div>
+                    </div>`;
+            });
+        } 
+        // Si Firebase est vide, on laisse le HTML original (tes 4 cartes) tranquille
+    });
+</script>
 </body>
 </html>
