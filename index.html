@@ -17,6 +17,49 @@
     
     <div class="grid" id="storesGrid">
         </div>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
+        authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
+        projectId: "karnash-marketplace-de-la-mode",
+        storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
+        messagingSenderId: "94247832680",
+        appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Connexion au dossier globalProducts
+    const productsRef = ref(db, 'globalProducts/');
+    
+    onValue(productsRef, (snapshot) => {
+        const data = snapshot.val();
+        const grid = document.getElementById('storesGrid');
+        grid.innerHTML = ""; // Vide la grille pour éviter les doublons
+
+        if (data) {
+            Object.keys(data).forEach(id => {
+                const item = data[id];
+                // Création dynamique de la carte produit
+                grid.innerHTML += `
+                    <div class="store-card">
+                        <div class="store-banner">
+                            <img src="${item.image || 'https://via.placeholder.com/300'}" alt="Produit">
+                        </div>
+                        <h3>${item.nom || "Article"}</h3>
+                        <p>${item.prix ? item.prix + ' $' : 'Prix non défini'}</p>
+                        <a href="boutique-client.html?id=${id}" class="btn">Voir détails</a>
+                    </div>`;
+            });
+        } else {
+            grid.innerHTML = "<p style='text-align:center; width:100%;'>Aucun produit trouvé dans la base.</p>";
+        }
+    });
+</script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
