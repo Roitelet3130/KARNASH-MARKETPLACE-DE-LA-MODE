@@ -20,31 +20,42 @@
     import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
     const firebaseConfig = {
-        // ... garde ton code config ici ...
+        apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
+        authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
+        projectId: "karnash-marketplace-de-la-mode",
+        storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
+        messagingSenderId: "94247832680",
+        appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
     };
-    
+
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // On récupère les données
     const productsRef = ref(db, 'globalProducts/');
     onValue(productsRef, (snapshot) => {
         const data = snapshot.val();
-        console.log("Données reçues de Firebase :", data);
-        
+        const grid = document.getElementById('storesGrid');
+        grid.innerHTML = ""; // Vide le contenu pour éviter les doublons
+
         if (data) {
-            const grid = document.getElementById('storesGrid');
-            grid.innerHTML = ""; // Vide le contenu actuel
-            
+            // On boucle sur chaque produit dans Firebase
             Object.keys(data).forEach(id => {
                 const item = data[id];
-                // Ajout automatique dans la grille
+                
+                // On injecte le HTML dans la page
                 grid.innerHTML += `
                     <div class="store-card">
-                        <img src="${item.image || 'https://via.placeholder.com/150'}" style="width:100%">
-                        <h3>${item.nom || "Article"}</h3>
-                        <p>${item.prix || "0"} $</p>
+                        <div class="store-banner">
+                            <img src="${item.image || 'https://via.placeholder.com/300'}">
+                        </div>
+                        <h3>${item.nom || "Sans nom"}</h3>
+                        <p>Prix: ${item.prix || "0"} $</p>
+                        <a href="#" class="btn">Voir plus</a>
                     </div>`;
             });
+        } else {
+            grid.innerHTML = "<p>Aucun produit disponible pour le moment.</p>";
         }
     });
 </script>
