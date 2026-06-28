@@ -129,29 +129,29 @@
         // Connexion au dossier globalProducts
         const productsRef = ref(db, 'globalProducts/');
         
-        onValue(productsRef, (snapshot) => {
-            const data = snapshot.val();
-            const grid = document.getElementById('storesGrid');
-            grid.innerHTML = ""; // Vide la grille avant d'afficher
+        // Change "OnValue" en "onValue" (tout en minuscule)
+onValue(productsRef, (snapshot) => {
+    const data = snapshot.val();
+    const grid = document.getElementById('storesGrid');
+    grid.innerHTML = ""; // Vide la grille pour éviter les doublons
 
-            if (data) {
-                Object.keys(data).forEach(id => {
-                    const item = data[id];
-                    // Création de la carte produit
-                    grid.innerHTML += `
-                        <div class="store-card">
-                            <div class="store-banner">
-                                <img src="${item.image || 'https://via.placeholder.com/300'}" alt="Produit">
-                            </div>
-                            <h3>${item.nom || "Article"}</h3>
-                            <p>${item.prix ? item.prix + ' $' : 'Prix non défini'}</p>
-                            <a href="boutique-client.html?id=${id}" class="btn">Voir détails</a>
-                        </div>`;
-                });
-            } else {
-                grid.innerHTML = "<p style='text-align:center; width:100%;'>Aucun produit trouvé dans la base.</p>";
-            }
+    if (data) {
+        Object.keys(data).forEach(id => {
+            const item = data[id];
+            grid.innerHTML += `
+                <div class="store-card">
+                    <div class="store-banner">
+                        <img src="${item.image || 'https://via.placeholder.com/300'}" alt="Produit">
+                    </div>
+                    <h3>${item.nom || "Article"}</h3>
+                    <p>${item.prix ? item.prix + ' $' : 'Prix non défini'}</p>
+                    <a href="boutique-client.html?id=${id}" class="btn">Voir détails</a>
+                </div>`;
         });
+    } else {
+        grid.innerHTML = "<p style='text-align:center; width:100%;'>Aucun produit trouvé dans la base.</p>";
+    }
+});
     </script>
 </body>
 </html>
