@@ -1,82 +1,20 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter des articles - Karnash</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-        .article-group { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; }
-        input { display: block; width: 100%; margin: 5px 0; padding: 8px; }
-        button { padding: 10px 20px; cursor: pointer; }
-    </style>
-</head>
-<body>
+<input type="text" id="nom" placeholder="Nom du Pagne">
+<input type="number" id="prix" placeholder="Prix">
+<input type="text" id="image" placeholder="URL Image">
+<button id="btnAjouter">Ajouter dans ma boutique</button>
 
-    <h1>Ajouter des articles à la boutique</h1>
+<script type="module">
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    // ... config ...
     
-    <form id="vendeurForm">
-        <div id="articlesContainer">
-            <div class="article-group">
-                <input type="text" placeholder="Nom de l'article (ex: Montre)" class="nom" required>
-                <input type="number" placeholder="Prix ($)" class="prix" required>
-                <input type="url" placeholder="Lien URL de l'image" class="image" required>
-            </div>
-        </div>
+    document.getElementById('btnAjouter').onclick = () => {
+        const idBoutique = "ID_DE_LA_BOUTIQUE_DU_VENDEUR"; // Tu peux le stocker en localStorage lors du login
+        const articlesRef = ref(db, 'boutiques/' + idBoutique + '/articles/');
         
-        <button type="button" onclick="ajouterLigne()">+ Ajouter un autre article</button>
-        <button type="submit" style="background: green; color: white;">Enregistrer tout le stock</button>
-    </form>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
-            authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
-            projectId: "karnash-marketplace-de-la-mode",
-            storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
-            messagingSenderId: "94247832680",
-            appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        
-        // Remplace "boutique1" par l'ID réel du vendeur connecté
-        const vendeurId = "boutique1"; 
-
-        // Fonction pour ajouter une ligne dans le HTML
-        window.ajouterLigne = () => {
-            const container = document.getElementById('articlesContainer');
-            const div = document.createElement('div');
-            div.className = 'article-group';
-            div.innerHTML = `
-                <input type="text" placeholder="Nom de l'article" class="nom" required>
-                <input type="number" placeholder="Prix ($)" class="prix" required>
-                <input type="url" placeholder="Lien URL de l'image" class="image" required>
-            `;
-            container.appendChild(div);
-        };
-
-        // Envoi vers Firebase
-        document.getElementById('vendeurForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const groupes = document.querySelectorAll('.article-group');
-            
-            groupes.forEach(groupe => {
-                const nom = groupe.querySelector('.nom').value;
-                const prix = groupe.querySelector('.prix').value;
-                const image = groupe.querySelector('.image').value;
-
-                const articlesRef = ref(db, 'boutiques/' + vendeurId + '/articles');
-                const nouvelArticleRef = push(articlesRef);
-                set(nouvelArticleRef, { nom, prix, image });
-            });
-            
-            alert("Articles ajoutés avec succès !");
-            window.location.reload();
-        });
-    </script>
-</body>
-</html>
+        push(articlesRef, {
+            nom: document.getElementById('nom').value,
+            prix: document.getElementById('prix').value,
+            image: document.getElementById('image').value
+        }).then(() => alert("Ajouté !"));
+    };
+</script>
