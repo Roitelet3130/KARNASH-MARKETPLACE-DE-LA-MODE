@@ -1,264 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription | Vogue</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-bg: #f4f5f7;
-            --card-bg: #ffffff;
-            --accent-purple: #6c5ce7;
-            --text-color: #2d3436;
-            --border-color: #dfe6e9;
-            --success-color: #2ecc71;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--primary-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .auth-container {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-        }
-        .auth-header { text-align: center; margin-bottom: 25px; }
-        .auth-header h2 { margin: 0 0 8px 0; font-size: 24px; }
-        .auth-header p { color: #7f8c8d; margin: 0; font-size: 14px; }
-        
-        .role-selector {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .role-option { flex: 1; text-align: center; }
-        .role-option input { display: none; }
-        .role-option label {
-            display: block; padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px; cursor: pointer;
-            font-weight: 600; transition: all 0.3s;
-        }
-        .role-option input:checked + label {
-            background: var(--accent-purple);
-            color: white; border-color: var(--accent-purple);
-        }
+<input type="text" id="nomBoutique" placeholder="Nom de votre boutique">
+<input type="email" id="email" placeholder="Votre email">
+<input type="password" id="pass" placeholder="Mot de passe">
+<button id="btnInscription">S'inscrire</button>
 
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; }
-        .input-wrap { position: relative; }
-        .input-wrap i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #b2bec3; }
-        .form-control {
-            width: 100%; padding: 12px 12px 12px 42px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px; font-size: 14px; box-sizing: border-box;
-            outline: none;
-        }
-        .form-control:focus { border-color: var(--accent-purple); }
-        
-        #vendeur-fields {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-purple);
-            margin-bottom: 16px;
-            display: none;
-        }
-        .btn-auth {
-            width: 100%; padding: 14px;
-            background: var(--accent-purple); color: white;
-            border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            transition: background 0.3s; margin-top: 10px;
-        }
-        .btn-auth:hover { background: #5b4cc4; }
-        .auth-footer { text-align: center; margin-top: 20px; font-size: 14px; }
-        .auth-footer a { color: var(--accent-purple); text-decoration: none; font-weight: bold; }
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
-        /* --- STYLES DE LA BOITE DE CONFIRMATION (MODAL SUCCÈS) --- */
-        .success-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); display: flex;
-            justify-content: center; align-items: center; z-index: 999;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .success-modal.active { opacity: 1; pointer-events: auto; }
-        .modal-box {
-            background: white; padding: 30px; border-radius: 16px;
-            text-align: center; max-width: 400px; width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            transform: scale(0.7); transition: transform 0.3s ease;
-        }
-        .success-modal.active .modal-box { transform: scale(1); }
-        .modal-icon {
-            width: 70px; height: 70px; background: #e8f8f0; color: var(--success-color);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 32px; margin: 0 auto 20px auto;
-        }
-        .btn-modal {
-            background: var(--success-color); color: white; border: none;
-            padding: 12px 25px; border-radius: 8px; font-size: 15px;
-            font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%;
-            transition: background 0.2s;
-        }
-        .btn-modal:hover { background: #27ae60; }
-    </style>
-</head>
-<body>
+    const app = initializeApp({ /* Ta config */ });
+    const db = getDatabase(app);
+    const auth = getAuth(app);
 
-<div class="auth-container">
-    <div class="auth-header">
-        <h2>Créer un compte</h2>
-        <p>Rejoignez la plateforme Vogue</p>
-    </div>
+    document.getElementById('btnInscription').onclick = () => {
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('pass').value;
+        const nom = document.getElementById('nomBoutique').value;
 
-    <div class="role-selector">
-        <div class="role-option">
-            <input type="radio" name="userRole" id="roleClient" value="client" checked onchange="toggleFields()">
-            <label for="roleClient"><i class="fa-solid fa-shopping-bag"></i> Client</label>
-        </div>
-        <div class="role-option">
-            <input type="radio" name="userRole" id="roleVendeur" value="vendeur" onchange="toggleFields()">
-            <label for="roleVendeur"><i class="fa-solid fa-store"></i> Vendeur</label>
-        </div>
-    </div>
+        // 1. Créer l'authentification
+        createUserWithEmailAndPassword(auth, email, pass).then((userCredential) => {
+            const uid = userCredential.user.uid;
 
-    <form id="rigorousRegisterForm">
-        <div class="form-group">
-            <label>Nom complet</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="fullName" class="form-control" placeholder="Votre nom" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Adresse Email</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" class="form-control" placeholder="exemple@vogue.com" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Numéro de Téléphone</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-phone"></i>
-                <input type="tel" id="phone" class="form-control" placeholder="Ex: +243..." required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Mot de passe</label>
-            <div class="input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
-            </div>
-        </div>
-
-        <div id="vendeur-fields">
-            <h4 style="margin: 0 0 10px 0; color: var(--accent-purple);">Informations sur la Boutique</h4>
-            <div class="form-group">
-                <label>Nom de la Boutique</label>
-                <div class="input-wrap">
-                    <i class="fa-solid fa-shop"></i>
-                    <input type="text" id="shopName" class="form-control" placeholder="Nom de votre marque">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Logo de la Boutique</label>
-                <input type="file" id="shopLogo" accept="image/*" style="font-size: 12px; margin-top: 5px;">
-            </div>
-        </div>
-
-        <button type="submit" class="btn-auth">S'inscrire</button>
-    </form>
-
-    <div class="auth-footer">
-        Déjà inscrit ? <a href="connexion.html">Connectez-vous</a>
-    </div>
-</div>
-
-<div class="success-modal" id="successModal">
-    <div class="modal-box">
-        <div class="modal-icon">
-            <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Inscription Réussie !</h3>
-        <p style="color: #7f8c8d; font-size: 14px; line-height: 1.5; margin: 0 0 15px 0;">
-            Bienvenue sur <br><strong style="color: var(--accent-purple);">KARNASH MARKETPLACE DE LA MODE</strong>.
-        </p>
-        <p style="color: #2d3436; font-size: 13px; margin: 0; font-weight: 600;">
-            Votre compte est désormais confirmé et actif.
-        </p>
-        <button class="btn-modal" onclick="redirigerVersConnexion()">Aller se connecter <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-</div>
-
-<script>
-function toggleFields() {
-    const isVendeur = document.getElementById('roleVendeur').checked;
-    document.getElementById('vendeur-fields').style.display = isVendeur ? 'block' : 'none';
-    document.getElementById('shopName').required = isVendeur;
-}
-
-document.getElementById('rigorousRegisterForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const role = document.querySelector('input[name="userRole"]:checked').value;
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim().toLowerCase();
-    const phone = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value.trim(); 
-    const shopName = role === 'vendeur' ? document.getElementById('shopName').value.trim() : '';
-
-    const userData = {
-        role: role,
-        fullName: fullName,
-        email: email,
-        phone: phone,
-        password: password,
-        shopName: shopName,
-        shopLogo: ''
+            // 2. Créer la boutique dans la base de données avec le statut "en_attente"
+            set(ref(db, 'boutiques/' + uid), {
+                nom: nom,
+                email: email,
+                statut: "en_attente", // <-- C'est ici que tu verrouilles l'accès
+                dateInscription: new Date().toISOString()
+            }).then(() => {
+                alert("Inscription envoyée ! Un administrateur validera votre boutique.");
+                window.location.href = "attente.html";
+            });
+        });
     };
-
-    const logoFile = document.getElementById('shopLogo').files[0];
-
-    if (logoFile && role === 'vendeur') {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-            userData.shopLogo = reader.result;
-            saveAndShowSuccess(userData);
-        }
-        reader.readAsDataURL(logoFile);
-    } else {
-        saveAndShowSuccess(userData);
-    }
-});
-
-function saveAndShowSuccess(data) {
-    // 1. Sauvegarde dans le localStorage
-    localStorage.setItem('compte_utilisateur', JSON.stringify(data));
-    
-    // 2. Affichage immédiat du message de confirmation (Modal)
-    document.getElementById('successModal').classList.add('active');
-}
-
-function redirigerVersConnexion() {
-    // 3. Redirection contrôlée vers la page de connexion
-    window.location.href = 'connexion.html';
-}
 </script>
-</body>
-</html>
