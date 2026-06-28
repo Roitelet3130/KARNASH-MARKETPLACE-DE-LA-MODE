@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Connexion</h2>
-    <input type="email" id="email" placeholder="Email">
+    <input type="email" id="email" placeholder="Email" value="roiteletnzau611@gmail.com">
     <input type="password" id="password" placeholder="Mot de passe">
     <button id="btnConnexion">Se connecter</button>
 
@@ -14,18 +14,39 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
         
-        // Ta config ici
-        const firebaseConfig = { /* ... */ };
+        // 1. Remplace avec TA configuration Firebase
+        const firebaseConfig = {
+            apiKey: "TON_API_KEY",
+            authDomain: "TON_PROJECT_ID.firebaseapp.com",
+            projectId: "TON_PROJECT_ID",
+            storageBucket: "TON_PROJECT_ID.appspot.com",
+            messagingSenderId: "ID",
+            appId: "ID"
+        };
+        
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        document.getElementById('btnConnexion').onclick = () => {
+        // 2. Ajout d'un écouteur d'événement clair
+        document.getElementById('btnConnexion').addEventListener('click', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
+            console.log("Tentative de connexion pour :", email);
+
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => window.location.href = "catalogue.html")
-                .catch(err => alert(err.message));
-        };
+                .then((userCredential) => {
+                    alert("Connexion réussie !");
+                    // Redirection vers le tableau de bord
+                    window.location.href = "dashboard.html"; 
+                })
+                .catch((error) => {
+                    // Cette partie t'aidera à comprendre le problème
+                    console.error("Code erreur :", error.code);
+                    console.error("Message erreur :", error.message);
+                    alert("Erreur : " + error.message);
+                });
+        });
     </script>
 </body>
 </html>
