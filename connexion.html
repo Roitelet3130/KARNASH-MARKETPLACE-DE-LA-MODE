@@ -5,48 +5,42 @@
     <title>Connexion</title>
 </head>
 <body>
-    <h2>Connexion</h2>
-    <input type="email" id="email" placeholder="Email" value="roiteletnzau611@gmail.com">
+    <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Mot de passe">
     <button id="btnConnexion">Se connecter</button>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
-        
-        // 1. Remplace avec TA configuration Firebase
-        const firebaseConfig = {
-            apiKey: "TON_API_KEY",
-            authDomain: "TON_PROJECT_ID.firebaseapp.com",
-            projectId: "TON_PROJECT_ID",
-            storageBucket: "TON_PROJECT_ID.appspot.com",
-            messagingSenderId: "ID",
-            appId: "ID"
-        };
-        
-        const app = initializeApp(firebaseConfig);
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+        const app = initializeApp({ /* TA CONFIG FIREBASE */ });
         const auth = getAuth(app);
+        const db = getDatabase(app);
 
-        // 2. Ajout d'un écouteur d'événement clair
-        document.getElementById('btnConnexion').addEventListener('click', () => {
+        document.getElementById('btnConnexion').onclick = () => {
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const pass = document.getElementById('password').value;
 
-            console.log("Tentative de connexion pour :", email);
+            signInWithEmailAndPassword(auth, email, pass).then((cred) => {
+                const uid = cred.user.uid;
 
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Connexion réussie !");
-                    // Redirection vers le tableau de bord
-                    window.location.href = "dashboard.html"; 
-                })
-                .catch((error) => {
-                    // Cette partie t'aidera à comprendre le problème
-                    console.error("Code erreur :", error.code);
-                    console.error("Message erreur :", error.message);
-                    alert("Erreur : " + error.message);
-                });
-        });
+                // 1. Vérification Admin
+                if (email === "ton-email@karnash.com") {
+                    window.location.href = "dashboard-admin.html";
+                } 
+                // 2. Vérification Vendeur
+                else {
+                    get(ref(db, 'boutiques/' + uid)).then((snapshot) => {
+                        if (snapshot.exists()) {
+                            window.location.href = "dashboard-vendeur.html";
+                        } else {
+                            window.location.href = "boutiques.html"; // Client
+                        }
+                    });
+                }
+            }).catch(err => alert(err.message));
+        };
     </script>
 </body>
 </html>
