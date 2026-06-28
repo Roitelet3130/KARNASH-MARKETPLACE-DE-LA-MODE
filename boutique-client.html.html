@@ -2,62 +2,30 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Détails de la Boutique</title>
-    <style>
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
-        .article-card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; text-align: center; }
-        .btn { display: block; background: #6a2b83; color: white; padding: 10px; margin-top: 10px; text-decoration: none; border-radius: 5px; }
-        .btn-chat { background: #25d366; color: white; padding: 10px; margin-top: 5px; display: block; text-decoration: none; border-radius: 5px; }
-        img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
-    </style>
+    <title>Détails</title>
 </head>
 <body>
-
-    <h1>Catalogue de la boutique</h1>
-    <div id="articlesGrid" class="grid">Chargement des articles...</div>
+    <div id="details">Chargement...</div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-        // CONFIGURATION (Remplace par ta config réelle)
-        const firebaseConfig = { /* ... */ };
-        const app = initializeApp(firebaseConfig);
+        const app = initializeApp({ /* ta config */ });
         const db = getDatabase(app);
-
-        // Récupérer l'ID de la boutique
+        
         const params = new URLSearchParams(window.location.search);
-        const boutiqueId = params.get('boutiqueId');
-        // Remplace par le numéro WhatsApp réel du vendeur
-        const phone = "243XXXXXXXXXX"; 
+        const id = params.get('id');
 
-        const articlesRef = ref(db, 'boutiques/' + boutiqueId + '/articles');
-
-        onValue(articlesRef, (snapshot) => {
-            const articles = snapshot.val();
-            const grid = document.getElementById('articlesGrid');
-            grid.innerHTML = "";
-
-            if (articles) {
-                Object.keys(articles).forEach(id => {
-                    const item = articles[id];
-                    grid.innerHTML += `
-                        <div class="article-card">
-                            <img src="${item.image}" alt="${item.nom}">
-                            <h3>${item.nom}</h3>
-                            <p>Prix : ${item.prix} $</p>
-                            
-                            <!-- Bouton Commander -->
-                            <a href="commande.html?nom=${encodeURIComponent(item.nom)}&prix=${item.prix}" class="btn">Commander</a>
-                            
-                            <!-- Bouton WhatsApp -->
-                            <a href="https://wa.me/${phone}?text=Bonjour, je suis intéressé par votre article : ${item.nom}" 
-                               target="_blank" class="btn-chat">Discuter 💬</a>
-                        </div>`;
-                });
-            } else {
-                grid.innerHTML = "<p>Aucun article disponible.</p>";
-            }
+        get(ref(db, 'globalProducts/' + id)).then((snapshot) => {
+            const item = snapshot.val();
+            document.getElementById('details').innerHTML = `
+                <h1>${item.nom}</h1>
+                <p>Prix : ${item.prix} $</p>
+                <a href="commande.html?nom=${item.nom}&prix=${item.prix}">Commander</a>
+                <br>
+                <a href="https://wa.me/243XXXXXXXXXX?text=Intéressé par ${item.nom}">Discuter par WhatsApp</a>
+            `;
         });
     </script>
 </body>
