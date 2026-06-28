@@ -2,156 +2,70 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karnash Marketplace</title>
     <style>
-       <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Karnash Marketplace</title>
-    
-    <style>
-        body <style>
-    body { font-family: 'Poppins', sans-serif; background: #f9f8fa; margin: 0; padding: 20px; }
-    
-    /* Grille qui s'adapte mieux */
-    .grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-        gap: 25px; 
-        max-width: 1200px; 
-        margin: auto; 
-    }
-
-    /* Carte élégante */
-    .store-card { 
-        background: white; 
-        border-radius: 15px; 
-        overflow: hidden; 
-        box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
-        transition: transform 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .store-card:hover { transform: translateY(-5px); }
-
-    /* Image centrée et propre */
-    .store-banner img { 
-        width: 100%; 
-        height: 200px; 
-        object-fit: cover; 
-    }
-
-    /* Texte bien présenté */
-    .card-content { padding: 15px; text-align: center; }
-    .card-content h3 { margin: 10px 0; font-size: 1.2rem; color: #333; }
-    .card-content p { color: #6a2b83; font-weight: bold; margin-bottom: 15px; }
-
-    /* Bouton design */
-    .btn { 
-        background: #6a2b83; 
-        color: white; 
-        padding: 12px; 
-        border-radius: 8px; 
-        text-decoration: none; 
-        display: block; 
-        text-align: center;
-        font-weight: 600;
-    }
-</style>
+        /* Design Moderne */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; color: #333; }
+        header { background: linear-gradient(135deg, #6a2b83, #8e44ad); color: white; padding: 3rem 1rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        
+        /* Grille Responsive */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* Cartes Boutiques */
+        .store-card { background: white; border-radius: 20px; padding: 20px; transition: transform 0.3s, box-shadow 0.3s; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #eee; }
+        .store-card:hover { transform: translateY(-12px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .store-card h3 { margin: 15px 0; color: #6a2b83; }
+        .btn { display: inline-block; background: #ff4757; color: white; padding: 12px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s; }
+        .btn:hover { background: #ff6b81; }
+    </style>
+</head>
 <body>
-  
 
-    <h1 style="text-align:center; padding: 20px;">Nos Boutiques Partenaires</h1>
-    
-    <div class="grid" id="storesGrid">
+    <header>
+        <h1>Karnash Marketplace</h1>
+        <p>Découvrez les meilleures boutiques et articles de mode</p>
+    </header>
+
+    <div class="container">
+        <div id="storesGrid" class="grid">
+            <p style="text-align:center; width:100%;">Chargement des boutiques...</p>
         </div>
-    <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
-        authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
-        projectId: "karnash-marketplace-de-la-mode",
-        storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
-        messagingSenderId: "94247832680",
-        appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // Connexion au dossier globalProductss
-    const productsRef = ref(db, 'globalProducts/');
-    
-    onValue(productsRef, (snapshot) => {
-        const data = snapshot.val();
-        const grid = document.getElementById('storesGrid');
-        grid.innerHTML = ""; // Vide la grille pour éviter les doublons
-
-        if (data) {
-            Object.keys(data).forEach(id => {
-                const item = data[id];
-                // Création dynamique de la carte produit
-                grid.innerHTML += `
-                    <div class="store-card">
-                        <div class="store-banner">
-                            <img src="${item.image || 'https://via.placeholder.com/300'}" alt="Produit">
-                        </div>
-                        <h3>${item.nom || "Article"}</h3>
-                        <p>${item.prix ? item.prix + ' $' : 'Prix non défini'}</p>
-                        <a href="boutique-client.html?id=${id}" class="btn">Voir détails</a>
-                    </div>`;
-            });
-        } else {
-            grid.innerHTML = "<p style='text-align:center; width:100%;'>Aucun produit trouvé dans la base.</p>";
-        }
-    });
-</script>
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBAqMJkvmJr_-izr7PzWL-SdlRovtMQoFs",
-            authDomain: "karnash-marketplace-de-la-mode.firebaseapp.com",
-            projectId: "karnash-marketplace-de-la-mode",
-            storageBucket: "karnash-marketplace-de-la-mode.firebasestorage.app",
-            messagingSenderId: "94247832680",
-            appId: "1:94247832680:web:dc4b82a1d46b008049bfdd"
+        // CONFIGURATION (Remplace avec tes vraies données)
+        const firebaseConfig = { 
+            /* Ton objet config */ 
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Connexion au dossier globalProducts
-        const productsRef = ref(db, 'globalProducts/');
-        
-        // Change "OnValue" en "onValue" (tout en minuscule)
-onValue(productsRef, (snapshot) => {
-    const data = snapshot.val();
-    const grid = document.getElementById('storesGrid');
-    grid.innerHTML = ""; // Vide la grille pour éviter les doublons
+        const storesRef = ref(db, 'boutiques/'); 
 
-    if (data) {
-        Object.keys(data).forEach(id => {
-            const item = data[id];
-            grid.innerHTML += `
-                <div class="store-card">
-                    <div class="store-banner">
-                        <img src="${item.image || 'https://via.placeholder.com/300'}" alt="Produit">
-                    </div>
-                    <h3>${item.nom || "Article"}</h3>
-                    <p>${item.prix ? item.prix + ' $' : 'Prix non défini'}</p>
-                    <a href="boutique-client.html?id=${id}" class="btn">Voir détails</a>
-                </div>`;
+        onValue(storesRef, (snapshot) => {
+            const data = snapshot.val();
+            const grid = document.getElementById('storesGrid');
+            grid.innerHTML = "";
+
+            if (data) {
+                Object.keys(data).forEach(id => {
+                    const shop = data[id];
+                    grid.innerHTML += `
+                        <div class="store-card">
+                            <h3>${shop.nom || "Boutique"}</h3>
+                            <p>Explorez notre catalogue exclusif</p>
+                            <a href="boutique-client.html?boutiqueId=${id}" class="btn">Voir les articles</a>
+                        </div>`;
+                });
+            } else {
+                grid.innerHTML = "<p>Aucune boutique disponible pour le moment.</p>";
+            }
         });
-    } else {
-        grid.innerHTML = "<p style='text-align:center; width:100%;'>Aucun produit trouvé dans la base.</p>";
-    }
-});
     </script>
 </body>
 </html>
