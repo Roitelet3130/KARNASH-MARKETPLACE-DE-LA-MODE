@@ -1,0 +1,24 @@
+<h1>Panel Administrateur</h1>
+<div id="listeBoutiques"></div>
+
+<script type="module">
+    import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    const db = getDatabase();
+
+    onValue(ref(db, 'boutiques/'), (snapshot) => {
+        const data = snapshot.val();
+        document.getElementById('listeBoutiques').innerHTML = "";
+        Object.keys(data).forEach(id => {
+            if (data[id].statut === "en_attente") {
+                document.getElementById('listeBoutiques').innerHTML += `
+                    <div>${data[id].nom} 
+                        <button onclick="valider('${id}')">Valider</button>
+                    </div>`;
+            }
+        });
+    });
+
+    window.valider = (id) => {
+        update(ref(db, 'boutiques/' + id), { statut: "active" });
+    };
+</script>

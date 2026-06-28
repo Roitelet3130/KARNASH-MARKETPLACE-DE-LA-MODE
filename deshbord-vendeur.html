@@ -1,0 +1,19 @@
+<h1>Ma Boutique</h1>
+<input type="text" id="nomArticle" placeholder="Nom">
+<input type="number" id="prix" placeholder="Prix">
+<button id="btnAjout">Ajouter article</button>
+
+<script type="module">
+    import { getAuth } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+    
+    const db = getDatabase();
+    const uid = getAuth().currentUser.uid;
+
+    document.getElementById('btnAjout').onclick = () => {
+        push(ref(db, 'boutiques/' + uid + '/articles/'), {
+            nom: document.getElementById('nomArticle').value,
+            prix: document.getElementById('prix').value
+        }).then(() => alert("Produit ajouté !"));
+    };
+</script>
