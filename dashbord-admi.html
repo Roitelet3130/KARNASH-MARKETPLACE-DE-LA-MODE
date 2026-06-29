@@ -1,24 +1,22 @@
-<h1>Panel Administrateur</h1>
-<div id="listeBoutiques"></div>
+<nav>
+    <a href="#">Vue d'ensemble</a>
+    <a href="#">Valider Boutiques</a>
+    <a href="connexion.html" onclick="auth.signOut()">Déconnexion</a>
+</nav>
+
+<div class="main-content">
+    <h1>Panneau de Contrôle Général</h1>
+    <div id="stats"></div>
+    <div id="listeValidation"></div>
+</div>
 
 <script type="module">
-    import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
-    const db = getDatabase();
+    // Script pour lister les boutiques en attente
+    import { db } from "./firebase-config.js";
+    import { ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
 
     onValue(ref(db, 'boutiques/'), (snapshot) => {
         const data = snapshot.val();
-        document.getElementById('listeBoutiques').innerHTML = "";
-        Object.keys(data).forEach(id => {
-            if (data[id].statut === "en_attente") {
-                document.getElementById('listeBoutiques').innerHTML += `
-                    <div>${data[id].nom} 
-                        <button onclick="valider('${id}')">Valider</button>
-                    </div>`;
-            }
-        });
+        // Logique pour afficher uniquement les boutiques avec statut: "en_attente"
     });
-
-    window.valider = (id) => {
-        update(ref(db, 'boutiques/' + id), { statut: "active" });
-    };
 </script>
