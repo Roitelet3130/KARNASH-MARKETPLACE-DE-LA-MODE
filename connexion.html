@@ -19,28 +19,33 @@
         const db = getDatabase(app);
 
         document.getElementById('btnConnexion').onclick = () => {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('password').value;
+// ... Tes imports en haut ...
 
-            signInWithEmailAndPassword(auth, email, pass).then((cred) => {
-                const uid = cred.user.uid;
+// Ligne 21 : Ton bouton existe déjà
+document.getElementById('btnConnexion').onclick = () => {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
 
-                // 1. Vérification Admin
-                if (email === "ton-email@karnash.com") {
-                    window.location.href = "dashboard-admin.html";
-                } 
-                // 2. Vérification Vendeur
-                else {
-                    get(ref(db, 'boutiques/' + uid)).then((snapshot) => {
-                        if (snapshot.exists()) {
-                            window.location.href = "dashboard-vendeur.html";
-                        } else {
-                            window.location.href = "boutiques.html"; // Client
-                        }
-                    });
+    // Ligne 25 : C'est ici que tu remplaces le contenu
+    signInWithEmailAndPassword(auth, email, pass).then((cred) => {
+        const uid = cred.user.uid;
+
+        // 1. Vérification Admin
+        if (email === "ton-email@karnash.com") { // Remplace par ton vrai email admin
+            window.location.href = "dashboard-admin.html";
+        } 
+        // 2. Vérification Vendeur ou Client
+        else {
+            get(ref(db, 'boutiques/' + uid)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    window.location.href = "dashboard-vendeur.html";
+                } else {
+                    window.location.href = "boutiques.html"; // Client
                 }
-            }).catch(err => alert(err.message));
-        };
+            });
+        }
+    }).catch(err => alert("Erreur : " + err.message));
+};
     </script>
 </body>
 </html>
